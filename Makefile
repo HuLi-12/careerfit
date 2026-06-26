@@ -16,7 +16,7 @@ validate:
 	python scripts/validate_skill.py
 
 package:
-	powershell -Command "Compress-Archive -Path SKILL.md, README.md, requirements.txt, src, examples, tests, docs, pyproject.toml -DestinationPath careerfit-evidence-skill.zip -Force"
+	python scripts/package_skill.py
 
 clean:
 	rm -rf __pycache__ */__pycache__ .pytest_cache

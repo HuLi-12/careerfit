@@ -198,11 +198,14 @@ class EvidenceMatcher:
         return "none"
 
     def risk(self, req, level):
-        return (
-            "green"
-            if level == "strong"
-            else ("yellow" if level in ["medium", "weak"] or req.priority != "high" else "red")
-        )
+        if level == "strong":
+            return "green"
+        if level == "medium":
+            return "yellow"
+        if level == "weak":
+            return "red" if req.priority == "high" else "yellow"
+        # level == "none"
+        return "red" if req.priority in ("high", "medium") else "yellow"
 
     def compute_confidence(self, blocks, level):
         """综合置信度：基于最高证据块和匹配等级"""

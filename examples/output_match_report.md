@@ -10,12 +10,12 @@
 
 | 维度 | 得分 |
 |---|---:|
-| 总分 | **58/100** |
+| 总分 | **57/100** |
 | Must-Have 基础分 | 74.5 |
-| Nice-to-Have 加分 | +3.2 |
+| Nice-to-Have 加分 | +2.7 |
 | 风险扣分 | -20.0 |
-| 置信度 | 70% |
-| 信息完整度 | 50% |
+| 置信度 | 73% |
+| 信息完整度 | 53% |
 
 推荐结论：**弱匹配，需要明显补强**  
 
@@ -25,13 +25,13 @@
 
 ### Top3 优势
 1. 具备 Spring Boot 相关能力：简历中存在3条证据（证据等级：A/B），整体判定为strong匹配。
-2. 具备 Spring 相关能力：简历中存在3条证据（证据等级：A/B），整体判定为strong匹配。
-3. 具备 MyBatis 相关能力：简历中存在2条证据（证据等级：A/B），整体判定为strong匹配。
+2. 具备 MyBatis 相关能力：简历中存在2条证据（证据等级：A/B），整体判定为strong匹配。
+3. 具备 数据库 相关能力：简历中存在3条证据（证据等级：A/B），整体判定为strong匹配。
 
 ### Top3 风险
 1. 【yellow】具备 Java 相关能力：简历中存在2条证据（证据等级：B），整体判定为medium匹配。
-2. 【yellow】具备 Redis 相关能力：简历中未发现能够支撑"具备 Redis 相关能力"的明确证据。
-3. 【yellow】具备 接口开发 相关能力：简历中存在1条证据（证据等级：D），整体判定为weak匹配。
+2. 【red】具备 Redis 相关能力：简历中未发现能够支撑"具备 Redis 相关能力"的明确证据。
+3. 【red】具备 接口开发 相关能力：简历中存在1条证据（证据等级：D），整体判定为weak匹配。
 
 ---
 
@@ -41,17 +41,12 @@
 |---|---|---|
 | 具备 Java 相关能力 | hard_skill | high |
 | 具备 Spring Boot 相关能力 | framework | high |
-| 具备 Spring 相关能力 | framework | medium |
 | 具备 MyBatis 相关能力 | framework | medium |
-| 具备 MySQL 相关能力 | database | high |
+| 具备 数据库 相关能力 | database | high |
 | 具备 Redis 相关能力 | database | medium |
 | 具备 接口开发 相关能力 | project_experience | high |
-| 具备 数据库设计 相关能力 | project_experience | medium |
-| 具备 缓存 相关能力 | database | medium |
 | 具备 沟通协作 相关能力 | soft_skill | medium |
-| 具备 SQL 相关能力 | hard_skill | medium |
-| 具备 Redis 相关经验优先 | database | medium |
-| 具备 缓存 相关经验优先 | database | medium |
+| 具备 Redis 相关能力 | database | medium |
 
 ---
 
@@ -61,17 +56,12 @@
 |---|---|---|---|---|---|
 | 具备 Java 相关能力 | B | medium | yellow | 项目《校园二手交易平台》：校园二手交易平台 Java SQL Spring Boot Spring MySQL Git Java SQL Spring Boot... | 建议补充"Java"对应的项目场景、个人负责部分、技术方案和业务结果。 |
 | 具备 Spring Boot 相关能力 | A/B | strong | green | 项目《用户管理系统》：用户管理系统 SQL Spring Boot Spring MyBatis MySQL SQL Spring Boot Spring My... | 建议继续强化"Spring Boot"在项目中的职责、技术难点和结果指标。 |
-| 具备 Spring 相关能力 | A/B | strong | green | 项目《用户管理系统》：用户管理系统 SQL Spring Boot Spring MyBatis MySQL SQL Spring Boot Spring My... | 建议继续强化"Spring"在项目中的职责、技术难点和结果指标。 |
 | 具备 MyBatis 相关能力 | A/B | strong | green | 项目《用户管理系统》：用户管理系统 SQL Spring Boot Spring MyBatis MySQL SQL Spring Boot Spring My... | 建议继续强化"MyBatis"在项目中的职责、技术难点和结果指标。 |
-| 具备 MySQL 相关能力 | A/B | strong | green | 项目《用户管理系统》：用户管理系统 SQL Spring Boot Spring MyBatis MySQL SQL Spring Boot Spring My... | 建议继续强化"MySQL"在项目中的职责、技术难点和结果指标。 |
-| 具备 Redis 相关能力 | E | none | yellow | 未发现明确证据... | 建议通过学习、项目实践或简历补充，建立"Redis"相关证据。 |
-| 具备 接口开发 相关能力 | D | weak | yellow | 存在相关但不充分的经历描述：出现"后端"... | 建议将相近经历改写为与"接口开发"更直接相关的证据。 |
-| 具备 数据库设计 相关能力 | D | weak | yellow | 存在相关但不充分的经历描述：出现"MySQL"... | 建议将相近经历改写为与"数据库设计"更直接相关的证据。 |
-| 具备 缓存 相关能力 | E | none | yellow | 未发现明确证据... | 建议通过学习、项目实践或简历补充，建立"缓存"相关证据。 |
+| 具备 数据库 相关能力 | A/B | strong | green | 项目《用户管理系统》：用户管理系统 SQL Spring Boot Spring MyBatis MySQL SQL Spring Boot Spring My... | 建议继续强化"数据库"在项目中的职责、技术难点和结果指标。 |
+| 具备 Redis 相关能力 | E | none | red | 未发现明确证据... | 建议通过学习、项目实践或简历补充，建立"Redis"相关证据。 |
+| 具备 接口开发 相关能力 | D | weak | red | 存在相关但不充分的经历描述：出现"后端"... | 建议将相近经历改写为与"接口开发"更直接相关的证据。 |
 | 具备 沟通协作 相关能力 | D | weak | yellow | 存在相关但不充分的经历描述：出现"联调"... | 建议将相近经历改写为与"沟通协作"更直接相关的证据。 |
-| 具备 SQL 相关能力 | A/B | strong | green | 项目《用户管理系统》：用户管理系统 SQL Spring Boot Spring MyBatis MySQL SQL Spring Boot Spring My... | 建议继续强化"SQL"在项目中的职责、技术难点和结果指标。 |
-| 具备 Redis 相关经验优先 | E | none | yellow | 未发现明确证据... | 建议通过学习、项目实践或简历补充，建立"Redis"相关证据。 |
-| 具备 缓存 相关经验优先 | E | none | yellow | 未发现明确证据... | 建议通过学习、项目实践或简历补充，建立"缓存"相关证据。 |
+| 具备 Redis 相关能力 | E | none | red | 未发现明确证据... | 建议通过学习、项目实践或简历补充，建立"Redis"相关证据。 |
 
 ---
 
@@ -79,11 +69,11 @@
 
 | 维度 | 得分 |
 |---|---:|
-| 核心技能匹配 | 17 |
+| 核心技能匹配 | 19 |
 | 项目经验匹配 | 11 |
 | 岗位职责匹配 | 8 |
 | 简历表达质量 | 14 |
-| 风险控制 | 7 |
+| 风险控制 | 5 |
 
 
 ## 6. 详细证据附录
@@ -93,11 +83,6 @@
 - [B] 技能栏：技能栏出现：Java 关键词：Java
 
 ### 具备 Spring Boot 相关能力（证据等级A/B, 置信度91%)
-- [B] 用户管理系统：项目《用户管理系统》：用户管理系统 SQL Spring Boot Spring MyBatis MySQL SQL Spring Boot Spring MyBatis MySQL 使用 Sprin 关键词：Spring Boot
-- [B] 校园二手交易平台：项目《校园二手交易平台》：校园二手交易平台 Java SQL Spring Boot Spring MySQL Git Java SQL Spring Boot Spring MySQL Git 参与 关键词：Spring Boot
-- [A] 技能栏：技能栏出现：Spring Boot、Spring 关键词：Spring Boot/Spring
-
-### 具备 Spring 相关能力（证据等级A/B, 置信度91%)
 - [B] 用户管理系统：项目《用户管理系统》：用户管理系统 SQL Spring Boot Spring MyBatis MySQL SQL Spring Boot Spring MyBatis MySQL 使用 Sprin 关键词：Spring
 - [B] 校园二手交易平台：项目《校园二手交易平台》：校园二手交易平台 Java SQL Spring Boot Spring MySQL Git Java SQL Spring Boot Spring MySQL Git 参与 关键词：Spring
 - [A] 技能栏：技能栏出现：Spring Boot、Spring 关键词：Spring Boot/Spring
@@ -106,16 +91,13 @@
 - [B] 用户管理系统：项目《用户管理系统》：用户管理系统 SQL Spring Boot Spring MyBatis MySQL SQL Spring Boot Spring MyBatis MySQL 使用 Sprin 关键词：MyBatis
 - [A] 技能栏：技能栏出现：MyBatis 关键词：MyBatis
 
-### 具备 MySQL 相关能力（证据等级A/B, 置信度91%)
+### 具备 数据库 相关能力（证据等级A/B, 置信度91%)
 - [B] 用户管理系统：项目《用户管理系统》：用户管理系统 SQL Spring Boot Spring MyBatis MySQL SQL Spring Boot Spring MyBatis MySQL 使用 Sprin 关键词：MySQL
 - [B] 校园二手交易平台：项目《校园二手交易平台》：校园二手交易平台 Java SQL Spring Boot Spring MySQL Git Java SQL Spring Boot Spring MySQL Git 参与 关键词：MySQL
 - [A] 技能栏：技能栏出现：SQL、MySQL 关键词：SQL/MySQL
 
 ### 具备 接口开发 相关能力（证据等级D, 置信度34%)
 - [D] 弱语义匹配：存在相关但不充分的经历描述：出现"后端" 关键词：后端
-
-### 具备 数据库设计 相关能力（证据等级D, 置信度34%)
-- [D] 弱语义匹配：存在相关但不充分的经历描述：出现"MySQL" 关键词：MySQL
 
 ### 具备 沟通协作 相关能力（证据等级D, 置信度34%)
 - [D] 弱语义匹配：存在相关但不充分的经历描述：出现"联调" 关键词：联调
@@ -165,33 +147,33 @@
 【优化理由】
 建议将相近经历改写为与"接口开发"更直接相关的证据。
 
-### 建议 4：具备 数据库设计 相关能力
+### 建议 4：具备 沟通协作 相关能力
 
 【原始内容】
-简历中出现与"数据库设计"相关但不充分的内容。
+简历中出现与"沟通协作"相关但不充分的内容。
 
 【存在问题】
 简历中存在1条证据（证据等级：D），整体判定为weak匹配。
 
 【优化版本】
-围绕"数据库设计"补充项目经历：说明业务背景、个人职责、技术方案、遇到的问题和最终结果。
+围绕"沟通协作"补充项目经历：说明业务背景、个人职责、技术方案、遇到的问题和最终结果。
 
 【优化理由】
-建议将相近经历改写为与"数据库设计"更直接相关的证据。
+建议将相近经历改写为与"沟通协作"更直接相关的证据。
 
-### 建议 5：具备 缓存 相关能力
+### 建议 5：具备 Redis 相关能力
 
 【原始内容】
-当前简历中缺少"缓存"的明确描述。
+当前简历中缺少"Redis"的明确描述。
 
 【存在问题】
-简历中未发现能够支撑"具备 缓存 相关能力"的明确证据。
+简历中未发现能够支撑"具备 Redis 相关能力"的明确证据。
 
 【优化版本】
-围绕"缓存"补充项目经历：说明业务背景、个人职责、技术方案、遇到的问题和最终结果。
+围绕"Redis"补充项目经历：说明业务背景、个人职责、技术方案、遇到的问题和最终结果。
 
 【优化理由】
-建议通过学习、项目实践或简历补充，建立"缓存"相关证据。
+建议通过学习、项目实践或简历补充，建立"Redis"相关证据。
 
 ---
 
@@ -206,8 +188,8 @@
 ### 项目深挖题
 1. 请结合项目说明你对"Java"的实际使用经验。
 2. 请结合项目说明你对"Spring Boot"的实际使用经验。
-3. 请结合项目说明你对"Spring"的实际使用经验。
-4. 请结合项目说明你对"MyBatis"的实际使用经验。
+3. 请结合项目说明你对"MyBatis"的实际使用经验。
+4. 请结合项目说明你对"数据库"的实际使用经验。
 
 ### HR问题
 
@@ -221,8 +203,8 @@
 1. Java：简历中存在2条证据（证据等级：B），整体判定为medium匹配。
 2. Redis：简历中未发现能够支撑"具备 Redis 相关能力"的明确证据。
 3. 接口开发：简历中存在1条证据（证据等级：D），整体判定为weak匹配。
-4. 数据库设计：简历中存在1条证据（证据等级：D），整体判定为weak匹配。
-5. 缓存：简历中未发现能够支撑"具备 缓存 相关能力"的明确证据。
+4. 沟通协作：简历中存在1条证据（证据等级：D），整体判定为weak匹配。
+5. Redis：简历中未发现能够支撑"具备 Redis 相关能力"的明确证据。
 
 ### 7天补强路线
 

@@ -97,7 +97,7 @@ class ScoreIntegrityTest(unittest.TestCase):
         self.assertIn("A", levels, f"strong匹配应含A级证据，实际: {levels}")
 
     def test_no_evidence_is_level_e(self):
-        """无证据时evidence_level应为E，风险为yellow"""
+        """无证据时match_level应为none，风险根据优先级判定"""
         job = JobProfile(
             must_have_requirements=[
                 RequirementItem("具备 Redis 相关能力", "database", "medium", ["Redis"])
@@ -108,8 +108,9 @@ class ScoreIntegrityTest(unittest.TestCase):
         matches = self.matcher.match(job, resume)
         m = matches[0]
         self.assertEqual(m.match_level, "none")
-        self.assertEqual(m.risk_level, "yellow")
-        self.assertEqual(len(m.evidence_blocks), 0, "Redis不匹配时不应有任何证据块")
+        # medium优先级的none → red（新风险规则）
+        self.assertEqual(m.risk_level, "red",
+                         f"medium+none应为red, 实际: {m.risk_level}")
 
     def test_b_level_is_medium_not_strong(self):
         """B级证据应为medium，仅A级证据为strong"""

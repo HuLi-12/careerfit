@@ -1,7 +1,8 @@
 import re
 from schemas.models import JobProfile, RequirementItem
 from services.skill_normalizer import SkillNormalizer
-from services.utils import normalize_text, split_lines, unique
+from services.utils import normalize_text, split_lines, unique, deduplicate_requirements
+from config import DATA_DIR
 
 TYPE = {
     "Java": "hard_skill",
@@ -35,6 +36,11 @@ class JDParser:
     def __init__(self):
         self.norm = SkillNormalizer()
 
+    @staticmethod
+    def _load_taxonomy():
+        from services.utils import load_json
+        return load_json(DATA_DIR / "skill_taxonomy.json", {})
+
     def parse(self, text):
         text = normalize_text(text)
         p = JobProfile(raw_text=text)
@@ -46,6 +52,10 @@ class JDParser:
         p.evaluation_keywords = keys
         p.must_have_requirements = self.reqs(text, keys, True)
         p.nice_to_have_requirements = self.reqs(text, keys, False)
+        # 按技能分类去重
+        taxonomy = self._load_taxonomy()
+        p.must_have_requirements = deduplicate_requirements(p.must_have_requirements, taxonomy)
+        p.nice_to_have_requirements = deduplicate_requirements(p.nice_to_have_requirements, taxonomy)
         p.responsibilities = [
             l
             for l in split_lines(text)

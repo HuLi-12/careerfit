@@ -25,6 +25,48 @@ def contains_any(text: str, keys):
     return any(k.lower() in low for k in keys)
 
 
+def deduplicate_requirements(items, taxonomy):
+    """按技能分类合并同类要求，同簇只保留优先级最高的那条"""
+    if not items or not taxonomy:
+        return items
+
+    # 构建 member → cluster 反向映射
+    member_to_cluster = {}
+    cluster_info = {}
+    for cid, info in taxonomy.items():
+        cluster_info[cid] = info
+        for m in info.get("members", []):
+            m_lower = m.lower().replace(" ", "").replace("-", "").replace("_", "")
+            member_to_cluster[m_lower] = cid
+
+    merged = {}
+    for item in items:
+        key = item.requirement
+        # 提取技能关键词（去除"具备"/"相关能力"/"相关经验优先"）
+        skill = key.replace("具备 ", "").replace(" 相关能力", "").replace(" 相关经验优先", "")
+        skill_key = skill.lower().replace(" ", "").replace("-", "").replace("_", "")
+
+        cid = member_to_cluster.get(skill_key)
+        if cid and cluster_info[cid].get("merge_strategy") == "representative":
+            rep = cluster_info[cid].get("representative", skill)
+            if cid in merged:
+                existing = merged[cid]
+                # 保留优先级更高的
+                pri_order = {"high": 0, "medium": 1, "low": 2}
+                if pri_order.get(item.priority, 1) < pri_order.get(existing.priority, 1):
+                    item.requirement = f"具备 {rep} 相关能力"
+                    merged[cid] = item
+                existing.keywords = list(set(existing.keywords + item.keywords))
+            else:
+                item.requirement = f"具备 {rep} 相关能力"
+                merged[cid] = item
+        else:
+            # 不在分类中的直接保留
+            merged[f"_raw_{id(item)}"] = item
+
+    return list(merged.values())
+
+
 def unique(items):
     seen = set()
     out = []
