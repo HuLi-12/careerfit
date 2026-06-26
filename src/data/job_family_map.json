@@ -1,0 +1,31 @@
+{
+  "Java后端开发": [
+    "Java",
+    "Spring Boot",
+    "MySQL",
+    "Redis",
+    "接口开发",
+    "数据库设计"
+  ],
+  "Python后端开发": [
+    "Python",
+    "FastAPI",
+    "Django",
+    "MySQL",
+    "Redis",
+    "接口开发"
+  ],
+  "前端开发": [
+    "JavaScript",
+    "TypeScript",
+    "Vue",
+    "React"
+  ],
+  "算法工程师": [
+    "Python",
+    "PyTorch",
+    "TensorFlow",
+    "机器学习",
+    "深度学习"
+  ]
+}
