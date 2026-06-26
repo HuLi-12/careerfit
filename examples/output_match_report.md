@@ -10,12 +10,12 @@
 
 | 维度 | 得分 |
 |---|---:|
-| 总分 | **57/100** |
+| 总分 | **58/100** |
 | Must-Have 基础分 | 74.5 |
-| Nice-to-Have 加分 | +2.7 |
+| Nice-to-Have 加分 | +3.5 |
 | 风险扣分 | -20.0 |
-| 置信度 | 73% |
-| 信息完整度 | 53% |
+| 置信度 | 79% |
+| 信息完整度 | 60% |
 
 推荐结论：**弱匹配，需要明显补强**  
 
@@ -46,7 +46,6 @@
 | 具备 Redis 相关能力 | database | medium |
 | 具备 接口开发 相关能力 | project_experience | high |
 | 具备 沟通协作 相关能力 | soft_skill | medium |
-| 具备 Redis 相关能力 | database | medium |
 
 ---
 
@@ -61,7 +60,6 @@
 | 具备 Redis 相关能力 | E | none | red | 未发现明确证据... | 建议通过学习、项目实践或简历补充，建立"Redis"相关证据。 |
 | 具备 接口开发 相关能力 | D | weak | red | 存在相关但不充分的经历描述：出现"后端"... | 建议将相近经历改写为与"接口开发"更直接相关的证据。 |
 | 具备 沟通协作 相关能力 | D | weak | yellow | 存在相关但不充分的经历描述：出现"联调"... | 建议将相近经历改写为与"沟通协作"更直接相关的证据。 |
-| 具备 Redis 相关能力 | E | none | red | 未发现明确证据... | 建议通过学习、项目实践或简历补充，建立"Redis"相关证据。 |
 
 ---
 
@@ -69,11 +67,11 @@
 
 | 维度 | 得分 |
 |---|---:|
-| 核心技能匹配 | 19 |
+| 核心技能匹配 | 23 |
 | 项目经验匹配 | 11 |
 | 岗位职责匹配 | 8 |
 | 简历表达质量 | 14 |
-| 风险控制 | 5 |
+| 风险控制 | 6 |
 
 
 ## 6. 详细证据附录
@@ -83,8 +81,8 @@
 - [B] 技能栏：技能栏出现：Java 关键词：Java
 
 ### 具备 Spring Boot 相关能力（证据等级A/B, 置信度91%)
-- [B] 用户管理系统：项目《用户管理系统》：用户管理系统 SQL Spring Boot Spring MyBatis MySQL SQL Spring Boot Spring MyBatis MySQL 使用 Sprin 关键词：Spring
-- [B] 校园二手交易平台：项目《校园二手交易平台》：校园二手交易平台 Java SQL Spring Boot Spring MySQL Git Java SQL Spring Boot Spring MySQL Git 参与 关键词：Spring
+- [B] 用户管理系统：项目《用户管理系统》：用户管理系统 SQL Spring Boot Spring MyBatis MySQL SQL Spring Boot Spring MyBatis MySQL 使用 Sprin 关键词：Spring Boot
+- [B] 校园二手交易平台：项目《校园二手交易平台》：校园二手交易平台 Java SQL Spring Boot Spring MySQL Git Java SQL Spring Boot Spring MySQL Git 参与 关键词：Spring Boot
 - [A] 技能栏：技能栏出现：Spring Boot、Spring 关键词：Spring Boot/Spring
 
 ### 具备 MyBatis 相关能力（证据等级A/B, 置信度91%)
@@ -161,20 +159,6 @@
 【优化理由】
 建议将相近经历改写为与"沟通协作"更直接相关的证据。
 
-### 建议 5：具备 Redis 相关能力
-
-【原始内容】
-当前简历中缺少"Redis"的明确描述。
-
-【存在问题】
-简历中未发现能够支撑"具备 Redis 相关能力"的明确证据。
-
-【优化版本】
-围绕"Redis"补充项目经历：说明业务背景、个人职责、技术方案、遇到的问题和最终结果。
-
-【优化理由】
-建议通过学习、项目实践或简历补充，建立"Redis"相关证据。
-
 ---
 
 ## 8. 面试预测
@@ -204,7 +188,6 @@
 2. Redis：简历中未发现能够支撑"具备 Redis 相关能力"的明确证据。
 3. 接口开发：简历中存在1条证据（证据等级：D），整体判定为weak匹配。
 4. 沟通协作：简历中存在1条证据（证据等级：D），整体判定为weak匹配。
-5. Redis：简历中未发现能够支撑"具备 Redis 相关能力"的明确证据。
 
 ### 7天补强路线
 

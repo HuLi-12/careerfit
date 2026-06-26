@@ -56,6 +56,9 @@ class JDParser:
         taxonomy = self._load_taxonomy()
         p.must_have_requirements = deduplicate_requirements(p.must_have_requirements, taxonomy)
         p.nice_to_have_requirements = deduplicate_requirements(p.nice_to_have_requirements, taxonomy)
+        p.nice_to_have_requirements = self._remove_existing_requirements(
+            p.nice_to_have_requirements, p.must_have_requirements
+        )
         p.responsibilities = [
             l
             for l in split_lines(text)
@@ -135,3 +138,8 @@ class JDParser:
         if not h:
             h.append("需要能将岗位要求转化为可交付任务并清晰复盘工作成果")
         return unique(h)
+
+    @staticmethod
+    def _remove_existing_requirements(candidates, existing):
+        existing_requirements = {item.requirement for item in existing}
+        return [item for item in candidates if item.requirement not in existing_requirements]
