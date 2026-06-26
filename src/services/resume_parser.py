@@ -49,7 +49,7 @@ class ResumeParser:
             out.append(item)
         return out[:3]
     def extract_school(self,text):
-        m=re.search(r'([一-龥]+(?:大学|学院|学校))',text)
+        m=re.search(r'([一-鿿A-Za-z0-9]+(?:大学|学院|学校))',text)
         return m.group(1) if m else ''
     def extract_major(self,text):
         m=re.search(r'(?:专业|主修)[:：]\s*([^\s，,；;]+)',text)

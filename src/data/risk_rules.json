@@ -2,6 +2,39 @@
   "red": "核心要求缺失或严重不匹配",
   "yellow": "部分满足但证据不足",
   "green": "已满足岗位要求",
+  "match_rules": [
+    {
+      "condition": "match_level == 'none' AND priority == 'high'",
+      "risk": "red",
+      "action": "建议优先补齐该项能力"
+    },
+    {
+      "condition": "match_level == 'none' AND priority != 'high'",
+      "risk": "yellow",
+      "action": "建议通过项目实践补充相关经验"
+    },
+    {
+      "condition": "match_level == 'weak'",
+      "risk": "yellow",
+      "action": "建议将相近经历改写为直接相关证据"
+    },
+    {
+      "condition": "match_level == 'medium'",
+      "risk": "yellow",
+      "action": "建议补充项目细节、职责和成果指标"
+    },
+    {
+      "condition": "match_level == 'strong'",
+      "risk": "green",
+      "action": "建议继续强化技术难点和结果指标"
+    }
+  ],
+  "scoring": {
+    "strong": 1.0,
+    "medium": 0.7,
+    "weak": 0.4,
+    "none": 0.0
+  },
   "sensitive_exclusion": [
     "性别",
     "年龄",
@@ -10,6 +43,10 @@
     "宗教",
     "政治立场",
     "外貌",
-    "健康状况"
+    "健康状况",
+    "家庭背景",
+    "地域歧视",
+    "身高",
+    "体重"
   ]
 }

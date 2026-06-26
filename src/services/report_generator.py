@@ -20,13 +20,37 @@ class ReportGenerator:
             lines += [f'### 建议 {i}：{item["target"]}','','【原始内容】',item['original'],'','【存在问题】',item['problem'],'','【优化版本】',item['optimized_text'],'','【优化理由】',item['reason'],'']
         lines += ['---','','## 8. 面试预测问题',''] + [f'{i+1}. {q}' for i,q in enumerate(self.iv.generate(job,resume,matches))]
         lines += ['','---','','## 9. 技能补差路线','']
-        for i,m in enumerate(risks[:5],1):
-            lines.append(f'### 阶段{i}：补齐"{m.requirement}"')
-            lines.append(f'第1步：学习基础概念和核心知识点')
-            lines.append(f'第2步：完成一个小型项目案例，应用所学知识')
-            lines.append(f'第3步：将项目证据补充到简历中，准备面试回答')
+        if risks:
+            lines.append('### 当前技能差距')
+            for i,m in enumerate(risks[:5],1):
+                t=m.requirement.replace('具备 ','').replace(' 相关能力','').replace(' 相关经验优先','')
+                lines.append(f'{i}. {t}：{m.reason}')
             lines.append('')
-        if not risks:
+            lines.append('### 7天补强路线')
+            steps={
+                'general':['第1天：学习相关基础概念、核心知识点和使用场景。','第2天：完成一个小型项目案例，将所学知识应用到实践中。','第3天：深入研究常见难点和面试高频问题。','第4天：整理项目中的相关实践点和优化经验。','第5天：将项目经历改写为 STAR 结构，突出个人职责和结果。','第6天：准备项目深挖问题的完整答案。','第7天：整体复盘，将学习成果补充到简历中。'],
+                'Redis':['第1天：学习 Redis 基础数据结构和缓存使用场景。','第2天：完成 Spring Boot 集成 Redis 的小案例。','第3天：学习缓存穿透、缓存击穿、缓存雪崩。','第4天：补充一个登录验证码或热点数据缓存案例。','第5天：整理项目中的数据库查询优化点。','第6天：将项目经历改写为 STAR 结构。','第7天：根据目标 JD 准备 10 个项目深挖问题答案。'],
+                'MySQL':['第1天：学习 MySQL 索引类型、SQL 执行流程和优化器原理。','第2天：学习事务隔离级别、锁机制和 MVCC。','第3天：练习慢查询分析和 explain 执行计划解读。','第4天：整理项目中的数据库设计和 SQL 优化案例。','第5天：学习分库分表、读写分离等架构方案。','第6天：将数据库相关经验补充到简历中。','第7天：准备数据库面试题和技术深挖答案。'],
+                '高并发':['第1天：学习并发编程基础和线程模型。','第2天：学习缓存、消息队列等常见高并发方案。','第3天：学习性能测试和调优方法论。','第4天：完成一个高并发场景的小型模拟项目。','第5天：将并发相关经验整理到简历中。','第6天：准备高并发场景面试题。','第7天：整体复盘，串联完整技术方案。'],
+                '接口开发':['第1天：学习 RESTful API 设计规范。','第2天：学习接口文档编写和前后端联调流程。','第3天：学习接口安全、鉴权、限流方案。','第4天：整理项目中的接口设计经验。','第5天：将接口职责和技术方案补充到简历。','第6天：准备接口设计相关面试问题。','第7天：总结接口优化的经验和案例。'],
+            }
+            used_steps = set()
+            for m in risks[:3]:
+                for keyword, plan_steps in steps.items():
+                    if keyword != 'general' and keyword.lower() in m.requirement.lower() or any(k in m.requirement for k in [keyword]):
+                        if keyword not in used_steps:
+                            used_steps.add(keyword)
+                            lines.append('')
+                            for s in plan_steps:
+                                lines.append(s)
+                            break
+                    elif keyword == 'general' and len(used_steps) == 0:
+                        pass
+            if not used_steps:
+                lines.append('')
+                for s in steps['general']:
+                    lines.append(s)
+        else:
             lines.append('1. 将现有强匹配项目补充技术难点、结果指标和面试复盘答案。')
             lines.append('2. 深入学习岗位涉及的核心技术，关注源码和底层原理。')
             lines.append('3. 准备项目深挖问题的 STAR 结构回答。')

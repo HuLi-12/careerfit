@@ -5,27 +5,102 @@
     "MySQL",
     "Redis",
     "接口开发",
-    "数据库设计"
+    "数据库设计",
+    "MyBatis",
+    "Spring Cloud",
+    "Kafka",
+    "Docker",
+    "Linux"
   ],
   "Python后端开发": [
     "Python",
     "FastAPI",
     "Django",
+    "Flask",
     "MySQL",
     "Redis",
-    "接口开发"
+    "接口开发",
+    "Docker",
+    "Linux"
   ],
   "前端开发": [
     "JavaScript",
     "TypeScript",
     "Vue",
-    "React"
+    "React",
+    "HTML",
+    "CSS",
+    "Webpack",
+    "Node.js"
   ],
   "算法工程师": [
     "Python",
     "PyTorch",
     "TensorFlow",
     "机器学习",
-    "深度学习"
+    "深度学习",
+    "数据分析",
+    "Spark",
+    "SQL"
+  ],
+  "大数据开发": [
+    "Java",
+    "Spark",
+    "Flink",
+    "Hadoop",
+    "Hive",
+    "SQL",
+    "Kafka",
+    "Linux"
+  ],
+  "测试开发": [
+    "Python",
+    "Java",
+    "Selenium",
+    "JMeter",
+    "接口测试",
+    "自动化测试",
+    "Linux",
+    "SQL"
+  ],
+  "运维开发": [
+    "Linux",
+    "Docker",
+    "Kubernetes",
+    "Jenkins",
+    "Shell",
+    "Python",
+    "Prometheus",
+    "Nginx"
+  ],
+  "Go后端开发": [
+    "Go",
+    "Golang",
+    "MySQL",
+    "Redis",
+    "接口开发",
+    "gRPC",
+    "Docker",
+    "Kubernetes"
+  ],
+  "产品经理": [
+    "需求分析",
+    "原型设计",
+    "项目管理",
+    "数据分析",
+    "用户调研",
+    "Axure",
+    "Figma",
+    "沟通协作"
+  ],
+  "数据分析师": [
+    "SQL",
+    "Python",
+    "Pandas",
+    "NumPy",
+    "数据分析",
+    "可视化",
+    "Excel",
+    "Tableau"
   ]
 }
