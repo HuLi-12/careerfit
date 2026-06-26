@@ -1,0 +1,71 @@
+{
+  "spring_ecosystem": {
+    "display_name": "Spring生态",
+    "members": ["Spring", "Spring Boot", "Spring Cloud", "Spring MVC", "Spring Security", "Spring Cloud Gateway", "Spring Cloud Sleuth"],
+    "merge_strategy": "representative",
+    "representative": "Spring Boot"
+  },
+  "database_design": {
+    "display_name": "数据库设计",
+    "members": ["数据库设计", "MySQL", "SQL", "数据库建模", "数据建模", "表结构设计", "SQL优化", "索引优化"],
+    "merge_strategy": "representative",
+    "representative": "数据库"
+  },
+  "cache_ecosystem": {
+    "display_name": "缓存生态",
+    "members": ["Redis", "缓存", "分布式缓存", "Cache", "缓存穿透", "缓存击穿", "缓存雪崩"],
+    "merge_strategy": "representative",
+    "representative": "Redis"
+  },
+  "interface_development": {
+    "display_name": "接口开发",
+    "members": ["接口开发", "后端开发", "API开发", "接口设计", "RESTful", "REST"],
+    "merge_strategy": "representative",
+    "representative": "接口开发"
+  },
+  "java_ecosystem": {
+    "display_name": "Java生态",
+    "members": ["Java", "Java开发", "Java基础", "JVM", "Java并发", "Java集合"],
+    "merge_strategy": "representative",
+    "representative": "Java"
+  },
+  "python_ecosystem": {
+    "display_name": "Python生态",
+    "members": ["Python", "Python开发", "FastAPI", "Django", "Flask"],
+    "merge_strategy": "representative",
+    "representative": "Python"
+  },
+  "frontend_ecosystem": {
+    "display_name": "前端生态",
+    "members": ["Vue", "React", "JavaScript", "TypeScript", "HTML", "CSS", "Node.js"],
+    "merge_strategy": "representative",
+    "representative": "前端"
+  },
+  "devops_ecosystem": {
+    "display_name": "DevOps生态",
+    "members": ["Docker", "Kubernetes", "K8s", "Jenkins", "CI/CD", "Nginx", "Linux"],
+    "merge_strategy": "none"
+  },
+  "bigdata_ecosystem": {
+    "display_name": "大数据生态",
+    "members": ["Spark", "Flink", "Hadoop", "Hive", "Kafka"],
+    "merge_strategy": "none"
+  },
+  "microservice_ecosystem": {
+    "display_name": "微服务生态",
+    "members": ["Spring Cloud", "Dubbo", "gRPC", "Nacos", "Sentinel", "Seata", "Gateway"],
+    "merge_strategy": "none"
+  },
+  "project_experience": {
+    "display_name": "项目经验",
+    "members": ["项目经验", "项目开发", "项目实践"],
+    "merge_strategy": "representative",
+    "representative": "项目经验"
+  },
+  "communication": {
+    "display_name": "沟通协作",
+    "members": ["沟通协作", "沟通", "协作", "团队协作", "跨部门协作"],
+    "merge_strategy": "representative",
+    "representative": "沟通协作"
+  }
+}

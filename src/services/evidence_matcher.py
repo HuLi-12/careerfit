@@ -1,9 +1,18 @@
-from schemas.models import EvidenceMatch
+from schemas.models import EvidenceMatch, EvidenceBlock
 from services.skill_normalizer import SkillNormalizer
 from services.utils import unique
 
+
 class EvidenceMatcher:
-    """对齐方案5.5匹配流程：技能标准化→关键词匹配→同义技能映射→证据强度判断→匹配等级判定→风险等级判定"""
+    """对齐方案5.5匹配流程：技能标准化→关键词匹配→同义技能映射→证据强度判断→匹配等级判定→风险等级判定
+
+    证据等级体系（Evidence Level）：
+        A — 强直接证据：技能栏明确出现 + 项目有明确实践且有结果指标
+        B — 较强证据：技能栏出现 + 项目有相关描述
+        C — 一般证据：技能栏出现但无项目支撑，或项目描述相关但无技能栏
+        D — 弱证据：只有相近经历或弱语义映射匹配
+        E — 无证据：未发现任何证据
+    """
 
     def __init__(self):
         self.norm = SkillNormalizer()
@@ -11,73 +20,153 @@ class EvidenceMatcher:
     def match(self, job, resume):
         out = []
         for req in job.must_have_requirements + job.nice_to_have_requirements:
-            ev = self.find(req, resume)
-            level = self.level(ev, resume)
+            blocks = self.find_blocks(req, resume)
+            level = self.match_level_from_blocks(blocks)
             risk = self.risk(req, level)
-            out.append(EvidenceMatch(
-                req.requirement, req.type, req.priority,
-                ev, level, risk,
-                self.reason(req, level),
-                self.suggest(req, level)
-            ))
+            confidence = self.compute_confidence(blocks, level)
+            ev_texts = [b.source_detail for b in blocks]
+            out.append(
+                EvidenceMatch(
+                    requirement=req.requirement,
+                    requirement_type=req.type,
+                    priority=req.priority,
+                    resume_evidence=ev_texts,
+                    evidence_blocks=blocks,
+                    confidence=confidence,
+                    match_level=level,
+                    risk_level=risk,
+                    reason=self.reason(req, level, blocks),
+                    suggestion=self.suggest(req, level),
+                )
+            )
         return out
 
-    def find(self, req, resume):
-        """从简历中寻找匹配证据，整合技能标准化和同义映射"""
-        ev = []
+    def find_blocks(self, req, resume):
+        """返回结构化证据块列表，每块自带 evidence_level"""
+        blocks = []
         keys = req.keywords or [req.requirement]
-        skills = resume.skills.get('all', [])
-        # 标准化技能列表以便同义匹配
+        skills = resume.skills.get("all", [])
         norm_skills = {self.norm.key(s): s for s in skills}
 
+        skill_matches = []
         for kw in keys:
             kw_norm = self.norm.key(kw)
-            # 1. 关键词匹配：精确匹配技能栏
             for s in skills:
                 if kw.lower() == s.lower() or kw.lower() in s.lower() or s.lower() in kw.lower():
-                    ev.append(f'技能栏出现：{s}')
-            # 2. 同义技能映射：技能 normalized 后匹配
+                    skill_matches.append(s)
             if kw_norm in norm_skills:
-                matched = norm_skills[kw_norm]
-                if f'技能栏出现：{matched}' not in ev:
-                    ev.append(f'技能栏出现：{matched}')
-            # 3. 检查同义词链：keyword 的标准化 key 是否在标准化技能中
-            for nk, ns in norm_skills.items():
-                if kw_norm == nk or kw_norm in nk or nk in kw_norm:
-                    if f'技能栏出现：{ns}' not in ev:
-                        ev.append(f'技能栏出现：{ns}')
+                skill_matches.append(norm_skills[kw_norm])
 
-        # 4. 项目经验匹配
+        skill_matches = unique(skill_matches)
+        has_skill = len(skill_matches) > 0
+
+        # 项目证据
+        has_project = False
+        has_result = False
         for p in resume.project_experience:
-            txt = ' '.join([p.project_name, ' '.join(p.tech_stack),
-                           ' '.join(p.tasks), ' '.join(p.results), p.raw_text])
+            norm_tech = self.norm.many(p.tech_stack)
+            txt = " ".join(
+                [
+                    p.project_name,
+                    " ".join(p.tech_stack),
+                    " ".join(norm_tech),  # 归一化后别名（如 k8s→Kubernetes）
+                    " ".join(p.tasks),
+                    " ".join(p.results),
+                    p.raw_text,
+                ]
+            )
             for kw in keys:
-                # 标准化项目文本和关键词后再匹配
-                if kw.lower() in txt.lower() or kw in txt:
-                    ev.append(f"项目《{p.project_name or '未命名项目'}》体现：{self.short(txt)}")
+                kw_lower = kw.lower()
+                if kw_lower in txt.lower() or kw in txt:
+                    has_project = True
+                    blocks.append(
+                        EvidenceBlock(
+                            source_type="project_experience",
+                            source_detail=f"项目《{p.project_name or '未命名项目'}》：{self.short(txt)}",
+                            relevance=0.9,
+                            confidence=0.85,
+                            evidence_level="B",
+                        )
+                    )
+                    # 检查是否有量化结果
+                    if any(k in txt for k in ["提升", "降低", "优化", "%", "效率", "性能", "稳定性"]):
+                        has_result = True
                     break
-                # 同义映射：将关键词标准化后在项目文本中查找
+                # 同义映射
                 kw_norm = self.norm.key(kw)
-                if kw_norm and kw_norm in txt.lower().replace(' ', '').replace('-', '').replace('_', ''):
-                    ev.append(f"项目《{p.project_name or '未命名项目'}》体现（同义映射）：{self.short(txt)}")
+                if kw_norm and kw_norm in txt.lower().replace(" ", "").replace("-", "").replace(
+                    "_", ""
+                ):
+                    has_project = True
+                    blocks.append(
+                        EvidenceBlock(
+                            source_type="project_experience",
+                            source_detail=f"项目《{p.project_name or '未命名项目'}》同义匹配：{self.short(txt)}",
+                            relevance=0.7,
+                            confidence=0.7,
+                            evidence_level="C",
+                        )
+                    )
                     break
 
-        if not ev:
-            ev += self.weak(req, resume)
-        return unique(ev)[:5]
+        # 技能栏证据
+        if has_skill:
+            blocks.append(
+                EvidenceBlock(
+                    source_type="skill_section",
+                    source_detail=f"技能栏出现：{'、'.join(skill_matches[:5])}",
+                    relevance=0.8,
+                    confidence=0.9,
+                    evidence_level="C",  # 后续升级
+                )
+            )
+
+        # 升级证据等级
+        for b in blocks:
+            if b.source_type == "skill_section" and has_project and has_result:
+                b.evidence_level = "A"
+                b.relevance = 1.0
+                b.confidence = 0.95
+            elif b.source_type == "skill_section" and has_project:
+                b.evidence_level = "B"
+                b.relevance = 0.9
+                b.confidence = 0.85
+            elif b.source_type == "project_experience" and not has_skill:
+                b.evidence_level = "C"
+                b.relevance = 0.7
+                b.confidence = 0.7
+            elif b.evidence_level == "C" and has_project and has_result:
+                b.evidence_level = "B"
+                b.relevance = 0.9
+                b.confidence = 0.85
+
+        if not blocks:
+            # 弱语义匹配
+            weak_ev = self.weak(req, resume)
+            for w in weak_ev:
+                blocks.append(
+                    EvidenceBlock(
+                        source_type="weak_semantic",
+                        source_detail=w,
+                        relevance=0.3,
+                        confidence=0.3,
+                        evidence_level="D",
+                    )
+                )
+
+        return blocks[:5]
 
     def weak(self, req, resume):
-        """相近但不精确的匹配（方案中weak匹配来源）"""
         raw = resume.raw_text
         mapping = {
-            '接口开发': ['后端', '接口', 'API', '服务端'],
-            '数据库设计': ['MySQL', 'SQL', '表', '数据库'],
-            '缓存': ['Redis', '缓存', 'Cache'],
-            '高并发': ['性能', '优化', '并发', 'QPS', '高可用'],
-            '沟通协作': ['团队', '协作', '联调', '跨部门'],
-            '项目经验': ['项目', '系统', '平台'],
-            '性能优化': ['优化', '性能', '响应', '延迟', '吞吐'],
-            '系统设计': ['架构', '设计', '模块', '分层'],
+            "接口开发": ["后端", "接口", "API", "服务端"],
+            "数据库设计": ["MySQL", "SQL", "表", "数据库"],
+            "缓存": ["Redis", "缓存", "Cache"],
+            "高并发": ["性能", "优化", "并发", "QPS", "高可用"],
+            "沟通协作": ["团队", "协作", "联调", "跨部门"],
+            "项目经验": ["项目", "系统", "平台"],
+            "性能优化": ["优化", "性能", "响应", "延迟", "吞吐"],
+            "系统设计": ["架构", "设计", "模块", "分层"],
         }
         for kw in req.keywords + [req.requirement]:
             for k, aliases in mapping.items():
@@ -87,44 +176,59 @@ class EvidenceMatcher:
                             return [f'存在相关但不充分的经历描述：出现"{a}"']
         return []
 
-    def level(self, ev, resume):
-        """匹配等级判定（方案5.5匹配等级表）"""
-        if not ev:
-            return 'none'
-        has_proj = any('项目' in e or '工作' in e for e in ev)
-        has_skill = any('技能栏' in e for e in ev)
-        has_result = any(k in resume.raw_text for k in
-                         ['提升', '降低', '优化', '%', '效率', '性能', '稳定性'])
-        if has_proj and (has_skill or has_result):
-            return 'strong'
-        if has_proj or has_skill:
-            return 'medium'
-        return 'weak'
+    def match_level_from_blocks(self, blocks):
+        """根据证据块判定 match_level"""
+        if not blocks:
+            return "none"
+        levels = [b.evidence_level for b in blocks]
+        if "A" in levels:
+            return "strong"
+        if "B" in levels:
+            return "strong"
+        if "C" in levels:
+            return "medium"
+        if "D" in levels:
+            return "weak"
+        return "none"
 
     def risk(self, req, level):
-        """风险等级判定（方案5.5：green/yellow/red）"""
-        return 'green' if level == 'strong' else (
-            'yellow' if level in ['medium', 'weak'] or req.priority != 'high' else 'red'
+        return (
+            "green"
+            if level == "strong"
+            else ("yellow" if level in ["medium", "weak"] or req.priority != "high" else "red")
         )
 
-    def reason(self, req, level):
+    def compute_confidence(self, blocks, level):
+        """综合置信度：基于最高证据块和匹配等级"""
+        if not blocks:
+            return 0.0
+        max_conf = max(b.confidence for b in blocks)
+        base = {"strong": 0.85, "medium": 0.65, "weak": 0.4, "none": 0.0}.get(level, 0.0)
+        return round((max_conf * 0.6 + base * 0.4), 2)
+
+    def reason(self, req, level, blocks=None):
+        if level == "none":
+            return f'简历中未发现能够支撑"{req.requirement}"的明确证据。'
+        if blocks:
+            levels_str = "/".join(sorted(set(b.evidence_level for b in blocks)))
+            return f"简历中存在{len(blocks)}条证据（证据等级：{levels_str}），整体判定为{level}匹配。"
         return {
-            'strong': f'简历中存在与"{req.requirement}"直接相关的技能或项目证据。',
-            'medium': f'简历中出现与"{req.requirement}"相关的信息，但项目细节或成果仍不够充分。',
-            'weak': f'简历中存在与"{req.requirement}"相近的经历，但缺少直接证明。',
-            'none': f'简历中未发现能够支撑"{req.requirement}"的明确证据。'
+            "strong": f'简历中存在与"{req.requirement}"直接相关的技能或项目证据。',
+            "medium": f'简历中出现与"{req.requirement}"相关的信息，但项目细节或成果仍不够充分。',
+            "weak": f'简历中存在与"{req.requirement}"相近的经历，但缺少直接证明。',
+            "none": f'简历中未发现能够支撑"{req.requirement}"的明确证据。',
         }[level]
 
     def suggest(self, req, level):
-        t = req.requirement.replace('具备 ', '').replace(' 相关能力', '').replace(' 相关经验优先', '')
-        if level == 'strong':
+        t = req.requirement.replace("具备 ", "").replace(" 相关能力", "").replace(" 相关经验优先", "")
+        if level == "strong":
             return f'建议继续强化"{t}"在项目中的职责、技术难点和结果指标。'
-        if level == 'medium':
+        if level == "medium":
             return f'建议补充"{t}"对应的项目场景、个人负责部分、技术方案和业务结果。'
-        if level == 'weak':
+        if level == "weak":
             return f'建议将相近经历改写为与"{t}"更直接相关的证据。'
         return f'建议通过学习、项目实践或简历补充，建立"{t}"相关证据。'
 
     def short(self, txt, n=120):
-        txt = ' '.join(txt.split())
-        return txt[:n] + ('...' if len(txt) > n else '')
+        txt = " ".join(txt.split())
+        return txt[:n] + ("..." if len(txt) > n else "")

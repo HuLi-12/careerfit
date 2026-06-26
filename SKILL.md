@@ -3,7 +3,13 @@ name: CareerFit Evidence
 description: 简历-JD证据链匹配与求职提升助手，支持简历解析、岗位能力建模、人岗匹配评分、风险诊断、简历优化、面试预测和技能补差路线生成。
 version: 1.0.0
 author: careerfit-team
-tags: [resume, recruitment, career, job-matching, interview, skill-gap]
+tags:
+  - resume
+  - recruitment
+  - career
+  - job-matching
+  - interview
+  - skill-gap
 ---
 
 # CareerFit Evidence
