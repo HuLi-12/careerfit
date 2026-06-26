@@ -112,7 +112,8 @@ class ReportGenerator:
                 f"### {m.requirement}（证据等级{'/'.join(sorted(set(b.evidence_level for b in ev_blocks)))}, 置信度{m.confidence:.0%})"
             )
             for b in ev_blocks:
-                lines.append(f"- [{b.evidence_level}] {b.source_type}：{b.source_detail[:100]}")
+                kw_str = f" 关键词：{'/'.join(b.matched_keywords[:3])}" if b.matched_keywords else ""
+                lines.append(f"- [{b.evidence_level}] {b.source_name or b.source_type}：{b.source_detail[:100]}{kw_str}")
             lines.append("")
         lines += ["", "## 7. 简历优化建议", ""]
         for i, item in enumerate(self.opt.optimize(resume, matches), 1):

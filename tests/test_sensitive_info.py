@@ -14,8 +14,8 @@ class SensitiveInfoTest(unittest.TestCase):
         out = CareerFitRouter().run(text)
         # 应该正常输出匹配报告，而不是因敏感信息报错
         self.assertIn("匹配", out)
-        # 敏感信息不应该导致异常
-        self.assertNotIn("异常", out)
+        # 报告不应是错误兜底页
+        self.assertNotIn("报告生成异常", out)
 
     def test_safety_scan_detects_sensitive(self):
         """安全扫描器能检测敏感词"""

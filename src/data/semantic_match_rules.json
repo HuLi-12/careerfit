@@ -1,0 +1,42 @@
+{
+  "接口开发": {
+    "aliases": ["后端", "接口", "API", "服务端", "Controller", "RESTful"],
+    "type": "project_experience"
+  },
+  "数据库设计": {
+    "aliases": ["MySQL", "SQL", "表", "数据库", "数据建模", "ER图"],
+    "type": "project_experience"
+  },
+  "缓存": {
+    "aliases": ["Redis", "缓存", "Cache", "热点数据", "分布式缓存"],
+    "type": "database"
+  },
+  "高并发": {
+    "aliases": ["性能", "优化", "并发", "QPS", "高可用", "限流", "熔断"],
+    "type": "hard_skill"
+  },
+  "沟通协作": {
+    "aliases": ["团队", "协作", "联调", "跨部门", "沟通"],
+    "type": "soft_skill"
+  },
+  "项目经验": {
+    "aliases": ["项目", "系统", "平台", "模块"],
+    "type": "project_experience"
+  },
+  "性能优化": {
+    "aliases": ["优化", "性能", "响应", "延迟", "吞吐", "慢查询"],
+    "type": "hard_skill"
+  },
+  "系统设计": {
+    "aliases": ["架构", "设计", "模块", "分层", "微服务"],
+    "type": "hard_skill"
+  },
+  "产品需求": {
+    "aliases": ["需求分析", "原型", "用户调研", "PRD", "产品设计"],
+    "type": "responsibility"
+  },
+  "数据分析": {
+    "aliases": ["SQL", "报表", "指标", "可视化", "漏斗分析", "A/B测试"],
+    "type": "hard_skill"
+  }
+}

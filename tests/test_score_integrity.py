@@ -75,7 +75,7 @@ class ScoreIntegrityTest(unittest.TestCase):
             self.assertLessEqual(b.confidence, 1.0)
 
     def test_strong_match_has_high_evidence(self):
-        """strong匹配必须有至少一条B级或A级证据"""
+        """strong匹配必须有至少一条A级证据（技能+项目+结果指标）"""
         job = JobProfile(
             must_have_requirements=[RequirementItem("具备 Java 相关能力", "hard_skill", "high", ["Java"])]
         )
@@ -83,14 +83,18 @@ class ScoreIntegrityTest(unittest.TestCase):
         resume.skills["all"] = ["Java"]
         resume.project_experience = [
             ProjectExperienceItem(
-                project_name="用户系统", tech_stack=["Java"], tasks=["后端接口开发"], raw_text="使用Java开发后端接口"
+                project_name="用户系统",
+                tech_stack=["Java"],
+                tasks=["后端接口开发"],
+                results=["提升接口响应速度50%"],
+                raw_text="使用Java开发后端接口，通过SQL优化提升性能50%",
             )
         ]
         matches = self.matcher.match(job, resume)
         m = matches[0]
-        self.assertEqual(m.match_level, "strong")
+        self.assertEqual(m.match_level, "strong", f"有技能+项目+结果应strong, 实际: {m.match_level}")
         levels = [b.evidence_level for b in m.evidence_blocks]
-        self.assertTrue("A" in levels or "B" in levels, f"strong匹配应含A/B级证据，实际: {levels}")
+        self.assertIn("A", levels, f"strong匹配应含A级证据，实际: {levels}")
 
     def test_no_evidence_is_level_e(self):
         """无证据时evidence_level应为E，风险为yellow"""
@@ -105,8 +109,69 @@ class ScoreIntegrityTest(unittest.TestCase):
         m = matches[0]
         self.assertEqual(m.match_level, "none")
         self.assertEqual(m.risk_level, "yellow")
-        for b in m.evidence_blocks:
-            self.assertEqual(b.evidence_level, "E")
+        self.assertEqual(len(m.evidence_blocks), 0, "Redis不匹配时不应有任何证据块")
+
+    def test_b_level_is_medium_not_strong(self):
+        """B级证据应为medium，仅A级证据为strong"""
+        job = JobProfile(
+            must_have_requirements=[RequirementItem("具备 Java 相关能力", "hard_skill", "high", ["Java"])]
+        )
+        resume = ResumeProfile(raw_text="技能：Java")
+        resume.skills["all"] = ["Java"]
+        resume.project_experience = [
+            ProjectExperienceItem(
+                project_name="用户系统", tech_stack=["Java"], tasks=["后端接口开发"], raw_text="使用Java开发后端接口"
+            )
+        ]
+        matches = self.matcher.match(job, resume)
+        m = matches[0]
+        # 有技能栏(→C) + 项目(→B) 但无结果指标 → 无A级 → medium
+        self.assertEqual(m.match_level, "medium", f"B级无结果应medium, 实际: {m.match_level}")
+        levels = [b.evidence_level for b in m.evidence_blocks]
+        self.assertNotIn("A", levels)
+        self.assertIn("B", levels)
+
+    def test_risk_penalty_capped(self):
+        """风险扣分不应超过20"""
+        from services.score_engine import ScoreEngine
+        from schemas.models import EvidenceMatch
+
+        engine = ScoreEngine()
+        # 构造10个red风险，按旧公式=80，应被cap到20
+        red_matches = [
+            EvidenceMatch(
+                requirement=f"要求{i}",
+                requirement_type="hard_skill",
+                priority="high",
+                match_level="none",
+                risk_level="red",
+            )
+            for i in range(10)
+        ]
+        penalty = engine._risk_penalty(red_matches)
+        self.assertLessEqual(penalty, 20.0, f"风险扣分应≤20, 实际: {penalty}")
+
+    def test_evidence_block_has_keywords(self):
+        """evidence_block应包含matched_keywords"""
+        job = JobProfile(
+            must_have_requirements=[RequirementItem("具备 Java 相关能力", "hard_skill", "high", ["Java"])]
+        )
+        resume = ResumeProfile(raw_text="技能：Java")
+        resume.skills["all"] = ["Java"]
+        blocks = self.matcher.find_blocks(job.must_have_requirements[0], resume)
+        for b in blocks:
+            self.assertIsInstance(b.matched_keywords, list)
+
+    def test_evidence_block_has_source_name(self):
+        """evidence_block应包含source_name"""
+        job = JobProfile(
+            must_have_requirements=[RequirementItem("具备 Java 相关能力", "hard_skill", "high", ["Java"])]
+        )
+        resume = ResumeProfile(raw_text="技能：Java")
+        resume.skills["all"] = ["Java"]
+        blocks = self.matcher.find_blocks(job.must_have_requirements[0], resume)
+        for b in blocks:
+            self.assertTrue(len(b.source_name) > 0, f"source_name不应为空, type={b.source_type}")
 
     # ── 评分合理性 ──
 

@@ -73,7 +73,9 @@ class EvidenceBlock:
     """结构化证据块 — 证据等级 A/B/C/D/E"""
 
     source_type: str = ""  # skill_section / project_experience / work_experience / weak_semantic
+    source_name: str = ""  # 来源名称（如项目名、技能栏标签）
     source_detail: str = ""  # 具体证据文本
+    matched_keywords: List[str] = field(default_factory=list)  # 命中的关键词
     relevance: float = 0.0  # 0.0–1.0
     confidence: float = 0.0  # 0.0–1.0
     evidence_level: str = "E"  # A / B / C / D / E

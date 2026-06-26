@@ -89,10 +89,10 @@ class ScoreEngine:
         return round(avg * weight, 1)
 
     def _risk_penalty(self, matches):
-        """风险扣分：red 每项 -8，yellow 每项 -3"""
+        """风险扣分：red 每项 -8，yellow 每项 -3，上限 20"""
         red = sum(1 for m in matches if m.risk_level == "red")
         yellow = sum(1 for m in matches if m.risk_level == "yellow")
-        return red * 8.0 + yellow * 3.0
+        return min(red * 8.0 + yellow * 3.0, 20.0)
 
     def _compute_confidence(self, matches, resume_text):
         """置信度：基于有证据的要求比例和证据质量"""
@@ -135,6 +135,7 @@ class ScoreEngine:
         return round(sum(vals) / len(vals) * w)
 
     def expr(self, text, w):
+        """简历表达质量分（辅助分，非岗位匹配分，仅衡量文本完整度）"""
         if not text:
             return 0
         s = 0.45

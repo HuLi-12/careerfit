@@ -16,6 +16,13 @@ class EvidenceMatcher:
 
     def __init__(self):
         self.norm = SkillNormalizer()
+        self.semantic_rules = self._load_semantic_rules()
+
+    @staticmethod
+    def _load_semantic_rules():
+        from config import DATA_DIR
+        from services.utils import load_json
+        return load_json(DATA_DIR / "semantic_match_rules.json", {})
 
     def match(self, job, resume):
         out = []
@@ -82,7 +89,9 @@ class EvidenceMatcher:
                     blocks.append(
                         EvidenceBlock(
                             source_type="project_experience",
+                            source_name=p.project_name or "未命名项目",
                             source_detail=f"项目《{p.project_name or '未命名项目'}》：{self.short(txt)}",
+                            matched_keywords=[kw],
                             relevance=0.9,
                             confidence=0.85,
                             evidence_level="B",
@@ -101,7 +110,9 @@ class EvidenceMatcher:
                     blocks.append(
                         EvidenceBlock(
                             source_type="project_experience",
+                            source_name=p.project_name or "未命名项目",
                             source_detail=f"项目《{p.project_name or '未命名项目'}》同义匹配：{self.short(txt)}",
+                            matched_keywords=[kw],
                             relevance=0.7,
                             confidence=0.7,
                             evidence_level="C",
@@ -114,7 +125,9 @@ class EvidenceMatcher:
             blocks.append(
                 EvidenceBlock(
                     source_type="skill_section",
+                    source_name="技能栏",
                     source_detail=f"技能栏出现：{'、'.join(skill_matches[:5])}",
+                    matched_keywords=skill_matches[:3],
                     relevance=0.8,
                     confidence=0.9,
                     evidence_level="C",  # 后续升级
@@ -147,7 +160,9 @@ class EvidenceMatcher:
                 blocks.append(
                     EvidenceBlock(
                         source_type="weak_semantic",
+                        source_name="弱语义匹配",
                         source_detail=w,
+                        matched_keywords=[w.split("出现")[-1].strip('"')] if "出现" in w else [],
                         relevance=0.3,
                         confidence=0.3,
                         evidence_level="D",
@@ -158,18 +173,9 @@ class EvidenceMatcher:
 
     def weak(self, req, resume):
         raw = resume.raw_text
-        mapping = {
-            "接口开发": ["后端", "接口", "API", "服务端"],
-            "数据库设计": ["MySQL", "SQL", "表", "数据库"],
-            "缓存": ["Redis", "缓存", "Cache"],
-            "高并发": ["性能", "优化", "并发", "QPS", "高可用"],
-            "沟通协作": ["团队", "协作", "联调", "跨部门"],
-            "项目经验": ["项目", "系统", "平台"],
-            "性能优化": ["优化", "性能", "响应", "延迟", "吞吐"],
-            "系统设计": ["架构", "设计", "模块", "分层"],
-        }
         for kw in req.keywords + [req.requirement]:
-            for k, aliases in mapping.items():
+            for k, rule in self.semantic_rules.items():
+                aliases = rule.get("aliases", [])
                 if k in kw or kw in k:
                     for a in aliases:
                         if a.lower() in raw.lower() or a in raw:
@@ -177,15 +183,15 @@ class EvidenceMatcher:
         return []
 
     def match_level_from_blocks(self, blocks):
-        """根据证据块判定 match_level"""
+        """根据证据块判定 match_level
+        A → strong, B/C → medium, D → weak, 无 → none
+        """
         if not blocks:
             return "none"
         levels = [b.evidence_level for b in blocks]
         if "A" in levels:
             return "strong"
-        if "B" in levels:
-            return "strong"
-        if "C" in levels:
+        if "B" in levels or "C" in levels:
             return "medium"
         if "D" in levels:
             return "weak"

@@ -1,7 +1,4 @@
 __pycache__/
-*.pyc
-.env
 .pytest_cache/
+*.pyc
 dist/
-build/
-*.zip
