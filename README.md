@@ -63,11 +63,11 @@ JD要求（如：熟悉 Redis）
 
 | 专家榜评分项 | 项目对应设计 |
 |-------------|-------------|
-| 鲁棒性 | 63 项测试、异常输入兜底、空输入/仅简历/仅JD/混合语言/Markdown 全覆盖 |
+| 鲁棒性 | 65 项测试、异常输入兜底、空输入/仅简历/仅JD/混合语言/Markdown 全覆盖 |
 | 创新性 | EvidenceBlock 五级证据等级、结构化证据链、动态加权评分、红黄绿风险 |
 | 结果质量 | 10 章节诊断报告、证据附录、学习路线、面试预测、简历优化 |
 | 技术设计 | 模块化 9 大服务、规则外置（skill_alias/semantic_match/skill_taxonomy）、CI |
-| 工程规范 | README、SKILL.md（validate PASS）、pyproject.toml、Makefile、63 tests |
+| 工程规范 | README、SKILL.md（validate PASS）、pyproject.toml、Makefile、65 tests |
 | 安全合规 | 敏感信息不参与评分、安全合规说明、SafetyChecker 检测 |
 
 ---
@@ -75,7 +75,7 @@ JD要求（如：熟悉 Redis）
 ## 4. 测试与CI
 
 ```
-Ran 63 tests in 0.376s
+Ran 65 tests in 0.118s
 OK
 ```
 
@@ -120,7 +120,7 @@ careerfit-evidence-skill/
 │   ├── services/                # 9 大服务模块
 │   ├── data/                    # 规则数据（skill_alias/semantic_match/taxonomy）
 │   └── prompts/
-├── tests/                       # 63 项测试
+├── tests/                       # 65 项测试
 ├── scripts/                     # validate/package
 └── docs/
 ```
@@ -165,5 +165,5 @@ cat examples/input_match_analysis.txt | python src/main.py
 - **落地性强**：粘贴简历和 JD 即可运行
 - **创新明确**：EvidenceBlock 证据链与动态评分
 - **工程可控**：模块化 9 大服务，规则外置可扩展
-- **鲁棒性强**：63 测试覆盖空输入/仅简历/仅JD/格式混乱/中英文混合
+- **鲁棒性强**：65 测试覆盖空输入/仅简历/仅JD/格式混乱/中英文混合
 - **安全合规**：敏感信息不参与评分

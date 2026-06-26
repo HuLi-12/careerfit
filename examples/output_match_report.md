@@ -90,8 +90,8 @@
 - [A] 技能栏：技能栏出现：MyBatis 关键词：MyBatis
 
 ### 具备 数据库 相关能力（证据等级A/B, 置信度91%)
-- [B] 用户管理系统：项目《用户管理系统》：用户管理系统 SQL Spring Boot Spring MyBatis MySQL SQL Spring Boot Spring MyBatis MySQL 使用 Sprin 关键词：MySQL
-- [B] 校园二手交易平台：项目《校园二手交易平台》：校园二手交易平台 Java SQL Spring Boot Spring MySQL Git Java SQL Spring Boot Spring MySQL Git 参与 关键词：MySQL
+- [B] 用户管理系统：项目《用户管理系统》：用户管理系统 SQL Spring Boot Spring MyBatis MySQL SQL Spring Boot Spring MyBatis MySQL 使用 Sprin 关键词：SQL
+- [B] 校园二手交易平台：项目《校园二手交易平台》：校园二手交易平台 Java SQL Spring Boot Spring MySQL Git Java SQL Spring Boot Spring MySQL Git 参与 关键词：SQL
 - [A] 技能栏：技能栏出现：SQL、MySQL 关键词：SQL/MySQL
 
 ### 具备 接口开发 相关能力（证据等级D, 置信度34%)
