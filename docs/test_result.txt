@@ -1,122 +1,122 @@
-test_empty (test_classifier.ClassifierTest.test_empty) ... ok
-test_resume_and_jd (test_classifier.ClassifierTest.test_resume_and_jd) ... ok
-test_critical_files_keep_multiline_structure (test_delivery_format.DeliveryFormatTest.test_critical_files_keep_multiline_structure) ... ok
-test_gitattributes_enforces_lf_for_delivery_files (test_delivery_format.DeliveryFormatTest.test_gitattributes_enforces_lf_for_delivery_files) ... ok
-test_verbose_test_result_is_checked_in (test_delivery_format.DeliveryFormatTest.test_verbose_test_result_is_checked_in) ... ok
-test_classifier_empty (test_empty_input.EmptyInputTest.test_classifier_empty) ... ok
-test_empty_input (test_empty_input.EmptyInputTest.test_empty_input)
-T4: ������ �� ������������������Ϣ ... ok
-test_nonsense_input (test_empty_input.EmptyInputTest.test_nonsense_input)
-T8: �޹����� �� ������������ ... ok
-test_short_input (test_empty_input.EmptyInputTest.test_short_input)
-T4: ������� �� ��������ģ�� ... ok
-test_jd_one_line (test_input_robustness.InputRobustnessTest.test_jd_one_line)
-JDֻ��һ�仰 �� �ܲ�����Ҫ�� ... ok
-test_long_jd (test_input_robustness.InputRobustnessTest.test_long_jd)
-JD�ܳ� �� ���ضϹؼ����� ... ok
-test_long_resume (test_input_robustness.InputRobustnessTest.test_long_resume)
-�����ܳ� �� ������ ... ok
-test_markdown_format_input (test_input_robustness.InputRobustnessTest.test_markdown_format_input)
-Markdown��ʽ���� �� ���������� ... ok
-test_no_separator_input (test_input_robustness.InputRobustnessTest.test_no_separator_input)
-�޷ָ������� �� ���Զ���ּ�����JD ... ok
-test_classifier_jd_only (test_jd_only.JdOnlyTest.test_classifier_jd_only) ... ok
-test_jd_messy_format (test_jd_only.JdOnlyTest.test_jd_messy_format)
-T5: JD��ʽ���� �� �ܲ�����Ҫ�� ... ok
-test_jd_only (test_jd_only.JdOnlyTest.test_jd_only)
-T3: ֻ��JD �� ���JD�Ż��ͺ�ѡ�˻��� ... ok
-test_data_analyst_input (test_job_families.JobFamiliesTest.test_data_analyst_input)
-���ݷ�����λ �� ��������� ... ok
-test_ops_engineer_input (test_job_families.JobFamiliesTest.test_ops_engineer_input)
-��ά��λ �� ��������� ... ok
-test_product_manager_input (test_job_families.JobFamiliesTest.test_product_manager_input)
-��Ʒ������λ �� ��������� ... ok
-test_recruiter_eval_mode (test_job_families.JobFamiliesTest.test_recruiter_eval_mode)
-��Ƹ������ģʽ ... ok
-test_social_recruitment_resume (test_job_families.JobFamiliesTest.test_social_recruitment_resume)
-���м��� �� �й������� ... ok
-test_test_engineer_input (test_job_families.JobFamiliesTest.test_test_engineer_input)
-���Ը�λ �� ��������� ... ok
-test_evidence_level_in_match (test_match_scenarios.MatchScenariosTest.test_evidence_level_in_match)
-ƥ��������֤�ݵȼ������Ŷ� ... ok
-test_json_has_score_fields (test_match_scenarios.MatchScenariosTest.test_json_has_score_fields)
-JSON��������������ֶ� ... ok
-test_redis_missing_risk (test_match_scenarios.MatchScenariosTest.test_redis_missing_risk)
-Redisȱʧ �� ӦΪ��ɫ���� ... ok
-test_skill_section_missing (test_match_scenarios.MatchScenariosTest.test_skill_section_missing)
-������ȱʧ �� ��Ӧ���� ... ok
-test_english_jd (test_mixed_language.MixedLanguageTest.test_english_jd)
-ȫӢ��JD ... ok
-test_mixed_cn_en (test_mixed_language.MixedLanguageTest.test_mixed_cn_en)
-T6: ��Ӣ�Ļ�� �� ������������ƥ�� ... ok
-test_example_report_does_not_duplicate_requirements (test_pipeline.PipelineTest.test_example_report_does_not_duplicate_requirements) ... ok
-test_json (test_pipeline.PipelineTest.test_json) ... ok
-test_markdown (test_pipeline.PipelineTest.test_markdown) ... ok
-test_skill_frontmatter_uses_one_field_per_line (test_pipeline.PipelineTest.test_skill_frontmatter_uses_one_field_per_line) ... ok
-test_full_match (test_resume_jd_match.ResumeJdMatchTest.test_full_match)
-T1: ��������+����JD �� �������ƥ�䱨�� ... ok
-test_full_with_optional (test_resume_jd_match.ResumeJdMatchTest.test_full_with_optional)
-�����ӷ����ƥ�� ... ok
-test_json_output (test_resume_jd_match.ResumeJdMatchTest.test_json_output)
-T1: JSON �����ʽ��ȷ ... ok
-test_classifier_resume_only (test_resume_only.ResumeOnlyTest.test_classifier_resume_only) ... ok
-test_resume_only (test_resume_only.ResumeOnlyTest.test_resume_only)
-T2: ֻ�м��� �� ���ְҵ����ͼ������� ... ok
-test_resume_short (test_resume_only.ResumeOnlyTest.test_resume_short)
-T9: ѧ���������޹������飩�� ����û�й�������������� ... ok
-test_scan (test_safety.SafetyTest.test_scan) ... ok
-test_b_level_is_medium_not_strong (test_score_integrity.ScoreIntegrityTest.test_b_level_is_medium_not_strong)
-B��֤��ӦΪmedium����A��֤��Ϊstrong ... ok
-test_confidence_and_completeness_range (test_score_integrity.ScoreIntegrityTest.test_confidence_and_completeness_range)
-confidence��information_completenessӦ��0-1֮�� ... ok
-test_empty_input_score (test_score_integrity.ScoreIntegrityTest.test_empty_input_score)
-�����벻������������Чscore�ṹ ... ok
-test_evidence_block_has_keywords (test_score_integrity.ScoreIntegrityTest.test_evidence_block_has_keywords)
-evidence_blockӦ����matched_keywords ... ok
-test_evidence_block_has_source_name (test_score_integrity.ScoreIntegrityTest.test_evidence_block_has_source_name)
-evidence_blockӦ����source_name ... ok
-test_evidence_block_structure (test_score_integrity.ScoreIntegrityTest.test_evidence_block_structure)
-EvidenceBlock ������ source_type / evidence_level / confidence ... ok
-test_json_has_all_score_fields (test_score_integrity.ScoreIntegrityTest.test_json_has_all_score_fields)
-JSON�����score�������ȫ��7�������ֶ� ... ok
-test_json_has_evidence_blocks (test_score_integrity.ScoreIntegrityTest.test_json_has_evidence_blocks)
-ÿ��evidence_match������evidence_blocks�б���confidence ... ok
-test_must_have_score_range (test_score_integrity.ScoreIntegrityTest.test_must_have_score_range)
-must_have_score Ӧ�� 0-100 ��Χ�� ... ok
-test_no_evidence_is_level_e (test_score_integrity.ScoreIntegrityTest.test_no_evidence_is_level_e)
-��֤��ʱmatch_levelӦΪnone�����ո������ȼ��ж� ... ok
-test_overall_score_derivation (test_score_integrity.ScoreIntegrityTest.test_overall_score_derivation)
-�ܷ� = must_have + nice_to_have - risk, �ضϵ�[0,100] ... ok
-test_redis_missing_is_yellow_risk (test_score_integrity.ScoreIntegrityTest.test_redis_missing_is_yellow_risk)
-RedisȱʧӦΪyellow���գ���red�� ... ok
-test_report_not_error_fallback (test_score_integrity.ScoreIntegrityTest.test_report_not_error_fallback)
-���治Ӧ���쳣����ҳ ... ok
-test_risk_penalty_capped (test_score_integrity.ScoreIntegrityTest.test_risk_penalty_capped)
-���տ۷ֲ�Ӧ����20 ... ok
-test_risk_penalty_non_negative (test_score_integrity.ScoreIntegrityTest.test_risk_penalty_non_negative)
-risk_penalty����>=0 ... ok
-test_spring_springboot_no_duplicate (test_score_integrity.ScoreIntegrityTest.test_spring_springboot_no_duplicate)
-Spring �� Spring Boot �����໥��Ⱦƥ��ȼ� ... ok
-test_strong_match_has_high_evidence (test_score_integrity.ScoreIntegrityTest.test_strong_match_has_high_evidence)
-strongƥ�����������һ��A��֤�ݣ�����+��Ŀ+���ָ�꣩ ... ok
-test_career_change (test_sensitive_info.SensitiveInfoTest.test_career_change)
-T10: ת�м��� �� ���ƥ�������Ǳ��� ... ok
-test_safety_scan_detects_sensitive (test_sensitive_info.SensitiveInfoTest.test_safety_scan_detects_sensitive)
-��ȫɨ�����ܼ�����д� ... ok
-test_sensitive_not_affect_score (test_sensitive_info.SensitiveInfoTest.test_sensitive_not_affect_score)
-T7: ����������Ϣ �� ������������Ϣ�жϺ�ѡ�� ... ok
-test_es_to_elasticsearch (test_skill_taxonomy.SkillTaxonomyTest.test_es_to_elasticsearch)
-ES �� Elasticsearch ͬ��ӳ�� ... ok
-test_k8s_in_project_matches (test_skill_taxonomy.SkillTaxonomyTest.test_k8s_in_project_matches)
-������Ŀдk8s��JDҪ��Kubernetes �� Ӧƥ�� ... ok
-test_k8s_to_kubernetes (test_skill_taxonomy.SkillTaxonomyTest.test_k8s_to_kubernetes)
-k8s �� Kubernetes ͬ��ӳ�� ... ok
-test_springcloud_mapped (test_skill_taxonomy.SkillTaxonomyTest.test_springcloud_mapped)
-SpringCloud �� Spring Cloud ... ok
-test_synonym_skill_matching (test_skill_taxonomy.SkillTaxonomyTest.test_synonym_skill_matching)
-����дES��JDҪ��Elasticsearch �� Ӧƥ��ɹ� ... ok
+test_empty (test_classifier.ClassifierTest) ... ok
+test_resume_and_jd (test_classifier.ClassifierTest) ... ok
+test_critical_files_keep_multiline_structure (test_delivery_format.DeliveryFormatTest) ... ok
+test_gitattributes_enforces_lf_for_delivery_files (test_delivery_format.DeliveryFormatTest) ... ok
+test_verbose_test_result_is_checked_in (test_delivery_format.DeliveryFormatTest) ... ok
+test_classifier_empty (test_empty_input.EmptyInputTest) ... ok
+test_empty_input (test_empty_input.EmptyInputTest)
+T4: 空输入 — 不崩溃，返回引导信息 ... ok
+test_nonsense_input (test_empty_input.EmptyInputTest)
+T8: 无关输入 — 给出合理引导 ... ok
+test_short_input (test_empty_input.EmptyInputTest)
+T4: 输入过短 — 给出补充模板 ... ok
+test_jd_one_line (test_input_robustness.InputRobustnessTest)
+JD只有一句话 — 能拆解核心要求 ... ok
+test_long_jd (test_input_robustness.InputRobustnessTest)
+JD很长 — 不截断关键内容 ... ok
+test_long_resume (test_input_robustness.InputRobustnessTest)
+简历很长 — 不崩溃 ... ok
+test_markdown_format_input (test_input_robustness.InputRobustnessTest)
+Markdown格式输入 — 能正常解析 ... ok
+test_no_separator_input (test_input_robustness.InputRobustnessTest)
+无分隔符输入 — 能自动拆分简历和JD ... ok
+test_classifier_jd_only (test_jd_only.JdOnlyTest) ... ok
+test_jd_messy_format (test_jd_only.JdOnlyTest)
+T5: JD格式混乱 — 能拆解核心要求 ... ok
+test_jd_only (test_jd_only.JdOnlyTest)
+T3: 只有JD — 输出JD优化和候选人画像 ... ok
+test_data_analyst_input (test_job_families.JobFamiliesTest)
+数据分析岗位 — 能正常输出 ... ok
+test_ops_engineer_input (test_job_families.JobFamiliesTest)
+运维岗位 — 能正常输出 ... ok
+test_product_manager_input (test_job_families.JobFamiliesTest)
+产品经理岗位 — 能正常输出 ... ok
+test_recruiter_eval_mode (test_job_families.JobFamiliesTest)
+招聘方评估模式 ... ok
+test_social_recruitment_resume (test_job_families.JobFamiliesTest)
+社招简历 — 有工作经验 ... ok
+test_test_engineer_input (test_job_families.JobFamiliesTest)
+测试岗位 — 能正常输出 ... ok
+test_evidence_level_in_match (test_match_scenarios.MatchScenariosTest)
+匹配结果包含证据等级和置信度 ... ok
+test_json_has_score_fields (test_match_scenarios.MatchScenariosTest)
+JSON输出包含新评分字段 ... ok
+test_redis_missing_risk (test_match_scenarios.MatchScenariosTest)
+Redis缺失 — 应为红色风险 ... ok
+test_skill_section_missing (test_match_scenarios.MatchScenariosTest)
+技能栏缺失 — 不应崩溃 ... ok
+test_english_jd (test_mixed_language.MixedLanguageTest)
+全英文JD ... ok
+test_mixed_cn_en (test_mixed_language.MixedLanguageTest)
+T6: 中英文混合 — 能正常解析和匹配 ... ok
+test_example_report_does_not_duplicate_requirements (test_pipeline.PipelineTest) ... ok
+test_json (test_pipeline.PipelineTest) ... ok
+test_markdown (test_pipeline.PipelineTest) ... ok
+test_skill_frontmatter_uses_one_field_per_line (test_pipeline.PipelineTest) ... ok
+test_full_match (test_resume_jd_match.ResumeJdMatchTest)
+T1: 完整简历+完整JD — 输出完整匹配报告 ... ok
+test_full_with_optional (test_resume_jd_match.ResumeJdMatchTest)
+包含加分项的匹配 ... ok
+test_json_output (test_resume_jd_match.ResumeJdMatchTest)
+T1: JSON 输出格式正确 ... ok
+test_classifier_resume_only (test_resume_only.ResumeOnlyTest) ... ok
+test_resume_only (test_resume_only.ResumeOnlyTest)
+T2: 只有简历 — 输出职业方向和简历建议 ... ok
+test_resume_short (test_resume_only.ResumeOnlyTest)
+T9: 学生简历（无工作经验）— 不因没有工作经历而错误否定 ... ok
+test_scan (test_safety.SafetyTest) ... ok
+test_b_level_is_medium_not_strong (test_score_integrity.ScoreIntegrityTest)
+B级证据应为medium，仅A级证据为strong ... ok
+test_confidence_and_completeness_range (test_score_integrity.ScoreIntegrityTest)
+confidence和information_completeness应在0-1之间 ... ok
+test_empty_input_score (test_score_integrity.ScoreIntegrityTest)
+空输入不崩溃，返回有效score结构 ... ok
+test_evidence_block_has_keywords (test_score_integrity.ScoreIntegrityTest)
+evidence_block应包含matched_keywords ... ok
+test_evidence_block_has_source_name (test_score_integrity.ScoreIntegrityTest)
+evidence_block应包含source_name ... ok
+test_evidence_block_structure (test_score_integrity.ScoreIntegrityTest)
+EvidenceBlock 必须有 source_type / evidence_level / confidence ... ok
+test_json_has_all_score_fields (test_score_integrity.ScoreIntegrityTest)
+JSON输出的score必须包含全部7个评分字段 ... ok
+test_json_has_evidence_blocks (test_score_integrity.ScoreIntegrityTest)
+每条evidence_match必须有evidence_blocks列表和confidence ... ok
+test_must_have_score_range (test_score_integrity.ScoreIntegrityTest)
+must_have_score 应在 0-100 范围内 ... ok
+test_no_evidence_is_level_e (test_score_integrity.ScoreIntegrityTest)
+无证据时match_level应为none，风险根据优先级判定 ... ok
+test_overall_score_derivation (test_score_integrity.ScoreIntegrityTest)
+总分 = must_have + nice_to_have - risk, 截断到[0,100] ... ok
+test_redis_missing_is_yellow_risk (test_score_integrity.ScoreIntegrityTest)
+Redis缺失应为yellow风险（非red） ... ok
+test_report_not_error_fallback (test_score_integrity.ScoreIntegrityTest)
+报告不应是异常兜底页 ... ok
+test_risk_penalty_capped (test_score_integrity.ScoreIntegrityTest)
+风险扣分不应超过20 ... ok
+test_risk_penalty_non_negative (test_score_integrity.ScoreIntegrityTest)
+risk_penalty必须>=0 ... ok
+test_spring_springboot_no_duplicate (test_score_integrity.ScoreIntegrityTest)
+Spring 和 Spring Boot 不会相互污染匹配等级 ... ok
+test_strong_match_has_high_evidence (test_score_integrity.ScoreIntegrityTest)
+strong匹配必须有至少一条A级证据（技能+项目+结果指标） ... ok
+test_career_change (test_sensitive_info.SensitiveInfoTest)
+T10: 转行简历 — 输出匹配结果而非报错 ... ok
+test_safety_scan_detects_sensitive (test_sensitive_info.SensitiveInfoTest)
+安全扫描器能检测敏感词 ... ok
+test_sensitive_not_affect_score (test_sensitive_info.SensitiveInfoTest)
+T7: 包含敏感信息 — 不基于敏感信息判断候选人 ... ok
+test_es_to_elasticsearch (test_skill_taxonomy.SkillTaxonomyTest)
+ES → Elasticsearch 同义映射 ... ok
+test_k8s_in_project_matches (test_skill_taxonomy.SkillTaxonomyTest)
+简历项目写k8s，JD要求Kubernetes — 应匹配 ... ok
+test_k8s_to_kubernetes (test_skill_taxonomy.SkillTaxonomyTest)
+k8s → Kubernetes 同义映射 ... ok
+test_springcloud_mapped (test_skill_taxonomy.SkillTaxonomyTest)
+SpringCloud → Spring Cloud ... ok
+test_synonym_skill_matching (test_skill_taxonomy.SkillTaxonomyTest)
+简历写ES，JD要求Elasticsearch — 应匹配成功 ... ok
 
 ----------------------------------------------------------------------
-Ran 65 tests in 0.118s
+Ran 65 tests in 0.175s
 
 OK

@@ -152,11 +152,16 @@ OK
 
 配置方式（环境变量）：
 
+默认无需 LLM API，系统使用规则管线稳定运行。
+如需开启模型增强，设置以下环境变量（三者缺一不可）：
+
 ```bash
-export LLM_API_KEY="your-api-key"
-export LLM_API_BASE="https://api.deepseek.com/anthropic"
-export LLM_MODEL="deepseek-v4-flash"
+export CAREERFIT_LLM_API_KEY="your-api-key"
+export CAREERFIT_LLM_API_BASE="https://api.anthropic.com"
+export CAREERFIT_LLM_MODEL="claude-sonnet-4-6"
 ```
+
+未配置时系统静默降级为纯规则引擎，不影响任何功能。
 
 ---
 
@@ -215,7 +220,7 @@ cat examples/input_match_analysis.txt | python src/main.py
 | 总分                    | 64/100 |
 | Must-Have 基础分        | 82.0 |
 | Nice-to-Have 加分       | +3.2 |
-| 风险扣分                | -21.0 |
+| 风险扣分                | -20.0 |
 | 置信度                  | 70% |
 | 信息完整度              | 53% |
 ```

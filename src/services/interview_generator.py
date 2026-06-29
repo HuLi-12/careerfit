@@ -39,4 +39,4 @@ class InterviewGenerator:
             if q not in seen:
                 seen.add(q)
                 out.append(q)
-        return out[:15]
+        return out[:25]

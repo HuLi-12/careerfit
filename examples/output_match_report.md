@@ -81,8 +81,8 @@
 - [B] 技能栏：技能栏出现：Java 关键词：Java
 
 ### 具备 Spring Boot 相关能力（证据等级A/B, 置信度91%)
-- [B] 用户管理系统：项目《用户管理系统》：用户管理系统 SQL Spring Boot Spring MyBatis MySQL SQL Spring Boot Spring MyBatis MySQL 使用 Sprin 关键词：Spring Boot
-- [B] 校园二手交易平台：项目《校园二手交易平台》：校园二手交易平台 Java SQL Spring Boot Spring MySQL Git Java SQL Spring Boot Spring MySQL Git 参与 关键词：Spring Boot
+- [B] 用户管理系统：项目《用户管理系统》：用户管理系统 SQL Spring Boot Spring MyBatis MySQL SQL Spring Boot Spring MyBatis MySQL 使用 Sprin 关键词：Spring
+- [B] 校园二手交易平台：项目《校园二手交易平台》：校园二手交易平台 Java SQL Spring Boot Spring MySQL Git Java SQL Spring Boot Spring MySQL Git 参与 关键词：Spring
 - [A] 技能栏：技能栏出现：Spring Boot、Spring 关键词：Spring Boot/Spring
 
 ### 具备 MyBatis 相关能力（证据等级A/B, 置信度91%)
@@ -176,8 +176,14 @@
 4. 请结合项目说明你对"数据库"的实际使用经验。
 
 ### HR问题
+1. 你为什么选择投递这个岗位？
+2. 你如何看待自己的职业发展方向？
+3. 如果入职后发现业务复杂度高于预期，你会如何快速熟悉系统？
 
 ### 反问建议
+1. 你可以反问面试官：这个岗位的团队目前面临的最大技术挑战是什么？
+2. 你可以反问面试官：团队的技术栈和开发流程是怎样的？
+3. 你可以反问面试官：入职后前三个月的重点目标是什么？
 
 ---
 

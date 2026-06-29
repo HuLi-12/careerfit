@@ -10,10 +10,12 @@ EXCLUDES = {
     "__pycache__",
     ".pytest_cache",
     ".git",
-    ".github",
+    ".claude",
+    "dist",
     "*.pyc",
     "*.pyo",
     ".DS_Store",
+    ".idea",
 }
 
 
