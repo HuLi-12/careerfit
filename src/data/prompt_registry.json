@@ -1,0 +1,30 @@
+{
+  "description": "提示词注册表 — 各任务模式使用的增强提示词模板",
+
+  "prompts": {
+    "resume_parse_enhance": {
+      "file": "resume_parse_enhance.md",
+      "description": "简历解析增强：用模型补充规则解析遗漏的信息",
+      "applies_to": ["resume_jd_match", "recruiter_eval", "resume_only", "interview_prepare", "skill_gap_plan"],
+      "required_vars": ["resume_text"]
+    },
+    "jd_parse_enhance": {
+      "file": "jd_parse_enhance.md",
+      "description": "JD 解析增强：用模型补充岗位要求提取",
+      "applies_to": ["resume_jd_match", "recruiter_eval", "jd_only", "interview_prepare", "skill_gap_plan"],
+      "required_vars": ["jd_text"]
+    },
+    "evidence_reasoning_enhance": {
+      "file": "evidence_reasoning_enhance.md",
+      "description": "证据推理增强：用模型判断匹配程度",
+      "applies_to": ["resume_jd_match", "recruiter_eval"],
+      "required_vars": ["requirement", "resume_text"]
+    },
+    "report_polish": {
+      "file": "report_polish.md",
+      "description": "报告润色：优化表达质量",
+      "applies_to": ["resume_jd_match", "recruiter_eval", "interview_prepare"],
+      "required_vars": ["report"]
+    }
+  }
+}

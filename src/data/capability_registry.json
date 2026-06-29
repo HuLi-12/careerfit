@@ -1,0 +1,133 @@
+{
+  "skill_name": "CareerFit Evidence",
+  "version": "1.0.0",
+  "description": "岗位胜任力证据链匹配助手 — 动态任务路由 + 场景化评分 + 可选模型增强",
+
+  "capabilities": [
+    {
+      "id": "resume_jd_match",
+      "name": "人岗匹配分析",
+      "description": "简历+JD 证据链匹配与评分诊断",
+      "task_modes": ["resume_jd_match", "recruiter_eval"],
+      "pipeline": [
+        "input_classifier",
+        "resume_parser",
+        "jd_parser",
+        "evidence_matcher",
+        "score_engine",
+        "report_generator"
+      ],
+      "output_sections": [
+        "summary",
+        "score_overview",
+        "requirement_breakdown",
+        "evidence_chain",
+        "risk_diagnosis",
+        "resume_optimization",
+        "interview_prediction",
+        "skill_gap_plan"
+      ],
+      "required_input": ["resume", "jd"],
+      "scoring_strategy": "standard_match"
+    },
+    {
+      "id": "resume_only",
+      "name": "简历分析",
+      "description": "仅简历的职业方向推荐与简历诊断",
+      "task_modes": ["resume_only"],
+      "pipeline": [
+        "input_classifier",
+        "resume_parser",
+        "report_generator"
+      ],
+      "output_sections": [
+        "skill_profile",
+        "career_direction",
+        "resume_diagnosis"
+      ],
+      "required_input": ["resume"],
+      "scoring_strategy": "none"
+    },
+    {
+      "id": "jd_only",
+      "name": "JD 分析",
+      "description": "仅 JD 的岗位建模与候选人画像",
+      "task_modes": ["jd_only"],
+      "pipeline": [
+        "input_classifier",
+        "jd_parser",
+        "report_generator"
+      ],
+      "output_sections": [
+        "position_info",
+        "requirement_breakdown",
+        "candidate_profile"
+      ],
+      "required_input": ["jd"],
+      "scoring_strategy": "none"
+    },
+    {
+      "id": "interview_prepare",
+      "name": "面试准备",
+      "description": "基于简历+JD 生成面试预测问题",
+      "task_modes": ["interview_prepare"],
+      "pipeline": [
+        "input_classifier",
+        "resume_parser",
+        "jd_parser",
+        "evidence_matcher",
+        "interview_generator",
+        "report_generator"
+      ],
+      "output_sections": [
+        "tech_questions",
+        "project_deep_dive",
+        "risk_followups",
+        "hr_questions",
+        "reverse_questions"
+      ],
+      "required_input": ["resume", "jd"],
+      "scoring_strategy": "none"
+    },
+    {
+      "id": "resume_optimize",
+      "name": "简历优化",
+      "description": "基于简历和匹配结果生成定向优化建议",
+      "task_modes": ["resume_optimize"],
+      "pipeline": [
+        "input_classifier",
+        "resume_parser",
+        "evidence_matcher",
+        "resume_optimizer",
+        "report_generator"
+      ],
+      "output_sections": [
+        "optimization_items"
+      ],
+      "required_input": ["resume"],
+      "scoring_strategy": "none"
+    },
+    {
+      "id": "skill_gap_plan",
+      "name": "技能补差",
+      "description": "基于匹配结果生成技能补强路线",
+      "task_modes": ["skill_gap_plan"],
+      "pipeline": [
+        "input_classifier",
+        "resume_parser",
+        "jd_parser",
+        "evidence_matcher",
+        "learning_path_generator",
+        "report_generator"
+      ],
+      "output_sections": [
+        "gap_analysis",
+        "seven_day_plan",
+        "fourteen_day_plan",
+        "thirty_day_plan"
+      ],
+      "required_input": ["resume", "jd"],
+      "scoring_strategy": "none"
+    }
+  ]
+}

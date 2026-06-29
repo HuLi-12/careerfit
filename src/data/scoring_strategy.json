@@ -1,0 +1,53 @@
+{
+  "description": "场景化评分策略配置 — 不同任务模式使用不同评分参数",
+
+  "default_strategy": "standard_match",
+
+  "strategies": {
+    "standard_match": {
+      "description": "标准人岗匹配评分（求职者视角）",
+      "priority_weight": { "high": 1.0, "medium": 0.8, "low": 0.6 },
+      "match_score": { "strong": 1.0, "medium": 0.7, "weak": 0.4, "none": 0.0 },
+      "risk_penalty": { "red": 8.0, "yellow": 3.0, "max": 20.0 },
+      "nice_to_have_bonus": { "max": 10.0 },
+      "confidence": { "evidence_ratio_weight": 0.6, "avg_confidence_weight": 0.4 },
+      "dimension_weights": {
+        "core_skill_match": 30,
+        "project_experience_match": 25,
+        "responsibility_match": 20,
+        "resume_expression_quality": 15,
+        "risk_control": 10
+      }
+    },
+    "recruiter_eval": {
+      "description": "招聘方评估评分（更严格的风险判定）",
+      "priority_weight": { "high": 1.2, "medium": 1.0, "low": 0.8 },
+      "match_score": { "strong": 1.0, "medium": 0.65, "weak": 0.35, "none": 0.0 },
+      "risk_penalty": { "red": 10.0, "yellow": 4.0, "max": 25.0 },
+      "nice_to_have_bonus": { "max": 8.0 },
+      "confidence": { "evidence_ratio_weight": 0.7, "avg_confidence_weight": 0.3 },
+      "dimension_weights": {
+        "core_skill_match": 35,
+        "project_experience_match": 25,
+        "responsibility_match": 20,
+        "resume_expression_quality": 10,
+        "risk_control": 10
+      }
+    },
+    "student_resume": {
+      "description": "学生简历评分（项目经历不足时更宽容）",
+      "priority_weight": { "high": 1.0, "medium": 0.8, "low": 0.6 },
+      "match_score": { "strong": 1.0, "medium": 0.7, "weak": 0.5, "none": 0.0 },
+      "risk_penalty": { "red": 6.0, "yellow": 2.0, "max": 15.0 },
+      "nice_to_have_bonus": { "max": 10.0 },
+      "confidence": { "evidence_ratio_weight": 0.5, "avg_confidence_weight": 0.5 },
+      "dimension_weights": {
+        "core_skill_match": 30,
+        "project_experience_match": 20,
+        "responsibility_match": 20,
+        "resume_expression_quality": 20,
+        "risk_control": 10
+      }
+    }
+  }
+}

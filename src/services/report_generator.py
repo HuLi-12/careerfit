@@ -315,3 +315,95 @@ class ReportGenerator:
             "5. 建议要求候选人提供项目成果或作品集。",
         ]
         return "\n".join(lines)
+
+    def interview_only(self, resume, job, matches):
+        """纯面试预测报告（interview_prepare 模式）"""
+        qs = self.iv.generate(job, resume, matches)
+        lines = [
+            "# 面试预测与准备建议",
+            "",
+            "## 1. 岗位核心要求回顾",
+            "",
+            "| 要求 | 类型 | 优先级 |",
+            "|---|---|---|",
+        ]
+        for r in job.must_have_requirements[:6]:
+            lines.append(f"| {r.requirement} | {r.type} | {r.priority} |")
+        lines += ["", "", "## 2. 技术基础题", ""]
+        tech = [q for q in qs if "项目" not in q and "反问" not in q and "面试官" not in q][:5]
+        for i, q in enumerate(tech, 1):
+            lines.append(f"{i}. {q}")
+        lines += ["", "", "## 3. 项目深挖题", ""]
+        proj = [q for q in qs if "项目" in q and "反问" not in q][:5]
+        for i, q in enumerate(proj, 1):
+            lines.append(f"{i}. {q}")
+        lines += ["", "", "## 4. 风险追问", ""]
+        risks = [q for q in qs if "证据" in q or "补齐" in q or "应对" in q][:3]
+        if risks:
+            for i, q in enumerate(risks, 1):
+                lines.append(f"{i}. {q}")
+        else:
+            lines.append("1. 当前无明显短板，建议准备项目难点和技术深挖。")
+        lines += ["", "", "## 5. HR 问题", ""]
+        hr = [q for q in qs if "投递" in q or "发展" in q or "期望" in q or "入职" in q][:3]
+        for i, q in enumerate(hr, 1):
+            lines.append(f"{i}. {q}")
+        lines += ["", "", "## 6. 反问建议", ""]
+        ask = [q for q in qs if "反问" in q][:3]
+        for i, q in enumerate(ask, 1):
+            lines.append(f"{i}. {q}")
+        return "\n".join(lines)
+
+    def skill_gap_only(self, mode, matches):
+        """纯技能补差路线报告（skill_gap_plan 模式）"""
+        risks = [m for m in matches if m.risk_level in ("red", "yellow")]
+        lines = [
+            "# 技能补差路线",
+            "",
+            "## 当前技能差距",
+            "",
+        ]
+        if risks:
+            for i, m in enumerate(risks[:5], 1):
+                t = m.requirement.replace("具备 ", "").replace(" 相关能力", "").replace(" 相关经验优先", "")
+                lines.append(f"{i}. {t}：{m.reason}")
+        else:
+            lines.append("暂无明显的核心短板，建议继续提升现有优势。")
+        lines += ["", "", self.lp.generate(risks, matches)]
+        return "\n".join(lines)
+
+    def resume_optimize_only(self, resume, matches):
+        """纯简历优化报告（resume_optimize 模式）"""
+        items = self.opt.optimize(resume, matches)
+        lines = [
+            "# 简历优化建议",
+            "",
+            f"当前技能：{', '.join(resume.skills.get('all', [])) or '未检测到明确技能'}",
+            f"项目数量：{len(resume.project_experience)}",
+            "",
+        ]
+        for i, item in enumerate(items, 1):
+            lines += [
+                f"## 建议 {i}：{item['target']}",
+                "",
+                "【原始内容】",
+                item["original"],
+                "",
+                "【存在问题】",
+                item["problem"],
+                "",
+                "【优化版本】",
+                item["optimized_text"],
+                "",
+                "【优化理由】",
+                item["reason"],
+                "",
+            ]
+        if not items:
+            lines += [
+                "暂无可优化的简历内容。建议：",
+                "1. 补充项目经历，使用 STAR 结构描述。",
+                "2. 技能栏按语言/框架/数据库/工具分组。",
+                "3. 每个项目至少补充个人负责模块和量化结果。",
+            ]
+        return "\n".join(lines)

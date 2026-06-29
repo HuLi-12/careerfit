@@ -99,7 +99,68 @@ OK
 | learning_path_generator | 7天/14天/30天技能补差路线 |
 | safety_checker | 敏感信息规避与合规说明 |
 
-## 6. 工程结构
+## 6. 动态适配机制
+
+本 Skill 不是单一静态报告模板，而是通过 TaskRouter + Capability Registry + Scoring Strategy + Optional LLM Enhancer 实现动态任务适配。
+
+### 6.1 动态任务路由
+
+`TaskRouter` 根据用户输入自动判断任务模式：
+
+```text
+用户输入 → TaskRouter.decide()
+  ├─ 简历 + JD     → resume_jd_match / recruiter_eval
+  ├─ 仅简历          → resume_only / resume_optimize
+  ├─ 仅 JD          → jd_only
+  ├─ 面试准备        → interview_prepare
+  └─ 技能补差        → skill_gap_plan
+```
+
+### 6.2 能力注册表
+
+`capability_registry.json` 声明每项能力的执行 pipeline、输出章节和所需输入：
+
+```json
+{
+  "id": "resume_jd_match",
+  "pipeline": [
+    "input_classifier", "resume_parser", "jd_parser",
+    "evidence_matcher", "score_engine", "report_generator"
+  ],
+  "required_input": ["resume", "jd"]
+}
+```
+
+### 6.3 场景化评分策略
+
+`scoring_strategy.json` 为不同场景提供差异化评分参数：
+
+| 策略 | 适用场景 | 默认 |
+|---|---|---|
+| standard_match | 求职者视角标准评分 | 默认 |
+| recruiter_eval | 招聘方评估，风险扣分更严格 | 可选 |
+| student_resume | 学生简历，项目不足时更宽容 | 可选 |
+
+### 6.4 可选模型增强层
+
+`LLMEnhancer` 在有 API 配置时启用，无 API 时规则系统兜底：
+
+```text
+有 API → 模型增强解析/推理/润色
+无 API → 纯规则引擎（当前默认）
+```
+
+配置方式（环境变量）：
+
+```bash
+export LLM_API_KEY="your-api-key"
+export LLM_API_BASE="https://api.deepseek.com/anthropic"
+export LLM_MODEL="deepseek-v4-flash"
+```
+
+---
+
+## 7. 工程结构
 
 ```text
 careerfit-evidence-skill/
@@ -125,7 +186,7 @@ careerfit-evidence-skill/
 └── docs/
 ```
 
-## 7. 快速运行
+## 8. 快速运行
 
 当前版本仅依赖 Python 标准库，推荐 Python 3.10+。
 
@@ -140,7 +201,7 @@ python src/main.py --input examples/input_match_analysis.txt --format json
 cat examples/input_match_analysis.txt | python src/main.py
 ```
 
-## 8. 典型输出片段
+## 9. 典型输出片段
 
 ```text
 # CareerFit 人岗匹配诊断报告
@@ -159,7 +220,7 @@ cat examples/input_match_analysis.txt | python src/main.py
 | 信息完整度              | 53% |
 ```
 
-## 9. 参赛价值
+## 10. 参赛价值
 
 - **场景清晰**：聚焦求职者与招聘方双向匹配
 - **落地性强**：粘贴简历和 JD 即可运行
